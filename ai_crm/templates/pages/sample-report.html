@@ -1,0 +1,194 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Sample Report – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/sample-report.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="sr-page">
+
+  <div class="sr-main">
+
+    <!-- ── Page heading ── -->
+    <div class="sr-header">
+      <h1>Sample Report</h1>
+      <p>View and manage all inspection sample reports</p>
+    </div>
+
+    <!-- ── Top action bar ── -->
+    <div class="sr-top-actions">
+
+      <div class="sr-filters">
+        <select id="srServiceFilter" aria-label="Filter by service">
+          <option>All Services</option>
+          <option>PDI</option>
+          <option>Home Buying</option>
+          <option>Seepage</option>
+        </select>
+        <select id="srResultFilter" aria-label="Filter by result">
+          <option>All Results</option>
+          <option>Pass</option>
+          <option>Fail</option>
+          <option>Pending</option>
+        </select>
+        <select id="srDateFilter" aria-label="Filter by date range">
+          <option>This Month</option>
+          <option>Last Month</option>
+          <option>Last 3 Months</option>
+        </select>
+      </div>
+
+      <div class="sr-action-btns">
+        <button id="srExportBtn" class="sr-btn-export" aria-label="Export reports">
+          <i class="fa-solid fa-download" aria-hidden="true"></i> Export
+        </button>
+        <button id="srNewBtn" class="sr-btn-new" aria-label="Create new report">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i> New Report
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ── Stat cards ── -->
+    <div class="sr-stats-row">
+
+      <div class="sr-stat-card blue">
+        <div class="sr-stat-label">Total Reports</div>
+        <div class="sr-stat-value">142</div>
+        <div class="sr-stat-sub">This month</div>
+      </div>
+
+      <div class="sr-stat-card green">
+        <div class="sr-stat-label">Pass</div>
+        <div class="sr-stat-value">98</div>
+        <div class="sr-stat-sub">69% pass rate</div>
+      </div>
+
+      <div class="sr-stat-card orange">
+        <div class="sr-stat-label">Fail</div>
+        <div class="sr-stat-value">28</div>
+        <div class="sr-stat-sub">20% fail rate</div>
+      </div>
+
+      <div class="sr-stat-card purple">
+        <div class="sr-stat-label">Pending</div>
+        <div class="sr-stat-value">16</div>
+        <div class="sr-stat-sub">Awaiting review</div>
+      </div>
+
+    </div>
+
+    <!-- ── Reports table ── -->
+    <div class="sr-table-wrapper">
+
+      <div class="sr-table-header">
+        <h3>All Reports</h3>
+        <input
+          class="sr-search-box"
+          id="srSearch"
+          type="search"
+          placeholder="🔍 Search reports..."
+          aria-label="Search reports"
+        >
+      </div>
+
+      <table class="sr-table" aria-label="Sample inspection reports">
+        <thead>
+          <tr>
+            <th>Report ID</th>
+            <th>Customer</th>
+            <th>Service</th>
+            <th>Inspector</th>
+            <th>Date</th>
+            <th>Result</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="srTableBody">
+
+          <tr data-service="PDI" data-result="Pass">
+            <td><span class="sr-report-id">#SR-001</span></td>
+            <td><span class="sr-customer-name">Rahul Sharma</span></td>
+            <td>PDI</td>
+            <td>Amit Patel</td>
+            <td>12 Jun 2025</td>
+            <td><span class="sr-badge pass">Pass</span></td>
+            <td>
+              <button class="sr-action-btn" aria-label="View report SR-001">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+              </button>
+            </td>
+          </tr>
+
+          <tr data-service="Home Buying" data-result="Fail">
+            <td><span class="sr-report-id">#SR-002</span></td>
+            <td><span class="sr-customer-name">Priya Mehta</span></td>
+            <td>Home Buying</td>
+            <td>Suresh Kumar</td>
+            <td>13 Jun 2025</td>
+            <td><span class="sr-badge fail">Fail</span></td>
+            <td>
+              <button class="sr-action-btn" aria-label="View report SR-002">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+              </button>
+            </td>
+          </tr>
+
+          <tr data-service="Seepage" data-result="Pending">
+            <td><span class="sr-report-id">#SR-003</span></td>
+            <td><span class="sr-customer-name">Vikram Singh</span></td>
+            <td>Seepage</td>
+            <td>Amit Patel</td>
+            <td>14 Jun 2025</td>
+            <td><span class="sr-badge pending">Pending</span></td>
+            <td>
+              <button class="sr-action-btn" aria-label="View report SR-003">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+              </button>
+            </td>
+          </tr>
+
+          <tr data-service="PDI" data-result="Pass">
+            <td><span class="sr-report-id">#SR-004</span></td>
+            <td><span class="sr-customer-name">Neha Joshi</span></td>
+            <td>PDI</td>
+            <td>Ravi Desai</td>
+            <td>15 Jun 2025</td>
+            <td><span class="sr-badge pass">Pass</span></td>
+            <td>
+              <button class="sr-action-btn" aria-label="View report SR-004">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+              </button>
+            </td>
+          </tr>
+
+          <tr data-service="Home Buying" data-result="Pass">
+            <td><span class="sr-report-id">#SR-005</span></td>
+            <td><span class="sr-customer-name">Arjun Nair</span></td>
+            <td>Home Buying</td>
+            <td>Suresh Kumar</td>
+            <td>16 Jun 2025</td>
+            <td><span class="sr-badge pass">Pass</span></td>
+            <td>
+              <button class="sr-action-btn" aria-label="View report SR-005">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i> View
+              </button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>{# /sr-table-wrapper #}
+
+  </div>{# /sr-main #}
+
+</div>{# /sr-page #}
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/sample-report.js"></script>
+{% endblock %}
