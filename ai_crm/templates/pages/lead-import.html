@@ -1,0 +1,185 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Lead Import – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/lead-import.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="li-page">
+  <div class="li-main">
+
+    <!-- ── Page header ── -->
+    <div class="li-header">
+      <h1>Lead Import</h1>
+      <p>Upload CSV / Excel files to import leads into the CRM</p>
+    </div>
+
+    <!-- ── Upload box ── -->
+    <div class="li-upload-box" id="liUploadBox" role="button" tabindex="0" aria-label="Click or drag a file to upload">
+
+      <div class="li-upload-icon">
+        <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
+      </div>
+
+      <h3>Drag &amp; Drop your Excel / CSV file here</h3>
+      <p>or click to browse your computer</p>
+
+      <!-- Hidden real file input -->
+      <input type="file" id="liFileInput" accept=".csv,.xls,.xlsx" aria-label="Select import file">
+
+      <button class="li-upload-btn" id="liUploadBtn" type="button">
+        <i class="fa-solid fa-folder-open" aria-hidden="true"></i> Browse File
+      </button>
+
+      <!-- Supported formats -->
+      <div class="li-formats">
+        Supported formats:
+        <span>.CSV</span>
+        <span>.XLS</span>
+        <span>.XLSX</span>
+      </div>
+
+      <!-- Selected file pill (shown after file is picked) -->
+      <div class="li-file-pill" id="liFilePill">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span id="liPillName">filename.csv</span>
+      </div>
+
+      <!-- Import now button (hidden until file selected) -->
+      <button
+        class="li-upload-btn"
+        id="liImportBtn"
+        type="button"
+        style="display:none; margin-top:14px; background:#16a34a;"
+        aria-label="Start import"
+      >
+        <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Import Now
+      </button>
+
+    </div>{# /li-upload-box #}
+
+    <!-- ── 3-step guide ── -->
+    <div class="li-steps">
+
+      <div class="li-step-card">
+        <div class="li-step-num">1</div>
+        <div class="li-step-body">
+          <h4>Upload File</h4>
+          <p>Select a CSV or Excel file from your computer. Max size 10 MB.</p>
+        </div>
+      </div>
+
+      <div class="li-step-card">
+        <div class="li-step-num">2</div>
+        <div class="li-step-body">
+          <h4>Map Columns</h4>
+          <p>Match spreadsheet columns to CRM fields like Name, Phone, Service.</p>
+        </div>
+      </div>
+
+      <div class="li-step-card">
+        <div class="li-step-num">3</div>
+        <div class="li-step-body">
+          <h4>Assign Leads</h4>
+          <p>Distribute imported leads by area, bucket, or specific telecaller.</p>
+        </div>
+      </div>
+
+    </div>{# /li-steps #}
+
+    <!-- ── Recent import history ── -->
+    <div class="li-history-card">
+
+      <div class="li-history-header">
+        <h3><i class="fa-solid fa-clock-rotate-left" aria-hidden="true" style="margin-right:8px; color:var(--color-text-muted);"></i>Recent Imports</h3>
+      </div>
+
+      <table class="li-history-table" aria-label="Recent lead import history">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Imported By</th>
+            <th>Date</th>
+            <th>Total Rows</th>
+            <th>Imported</th>
+            <th>Skipped</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>
+              <span class="li-filename">
+                <i class="fa-solid fa-file-excel" aria-hidden="true"></i>
+                leads_june_batch1.xlsx
+              </span>
+            </td>
+            <td>Saarva Admin</td>
+            <td>28 Jun 2025</td>
+            <td>320</td>
+            <td>318</td>
+            <td>2</td>
+            <td><span class="li-badge success"><i class="fa-solid fa-check" aria-hidden="true"></i> Success</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="li-filename">
+                <i class="fa-solid fa-file-csv" aria-hidden="true"></i>
+                gurgaon_lp_leads.csv
+              </span>
+            </td>
+            <td>Saarva Admin</td>
+            <td>22 Jun 2025</td>
+            <td>85</td>
+            <td>79</td>
+            <td>6</td>
+            <td><span class="li-badge partial"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Partial</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="li-filename">
+                <i class="fa-solid fa-file-excel" aria-hidden="true"></i>
+                meta_ads_may.xlsx
+              </span>
+            </td>
+            <td>Saarva Admin</td>
+            <td>01 Jun 2025</td>
+            <td>210</td>
+            <td>210</td>
+            <td>0</td>
+            <td><span class="li-badge success"><i class="fa-solid fa-check" aria-hidden="true"></i> Success</span></td>
+          </tr>
+
+          <tr>
+            <td>
+              <span class="li-filename">
+                <i class="fa-solid fa-file-csv" aria-hidden="true"></i>
+                bad_format_test.csv
+              </span>
+            </td>
+            <td>Saarva Admin</td>
+            <td>18 May 2025</td>
+            <td>50</td>
+            <td>0</td>
+            <td>50</td>
+            <td><span class="li-badge failed"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Failed</span></td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>{# /li-history-card #}
+
+  </div>{# /li-main #}
+</div>{# /li-page #}
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/lead-import.js"></script>
+{% endblock %}
