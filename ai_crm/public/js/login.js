@@ -1,50 +1,82 @@
 /* =====================================================
    LOGIN.JS – Saarva Admin CRM
-   Login page form handling
+   Uses Frappe's real login API endpoint
    ===================================================== */
 
 'use strict';
 
-/* ── Constants ── */
-var VALID_EMAIL    = 'admin@saarva.com';
-var VALID_PASSWORD = 'admin123';
-
 /**
- * Handle login form submission
- * @param {Event} e
+ * Handle login form submission — calls Frappe's login API
  */
 function handleLogin(e) {
   e.preventDefault();
 
-  var email    = document.getElementById('loginEmail').value.trim();
+  var username = document.getElementById('loginEmail').value.trim();
   var password = document.getElementById('loginPassword').value;
   var errorEl  = document.getElementById('loginError');
   var btn      = document.getElementById('loginBtn');
   var btnText  = document.getElementById('loginBtnText');
 
+  // Clear any previous error
   errorEl.textContent = '';
+
+  if (!username || !password) {
+    errorEl.textContent = '⚠️ Please enter your username and password.';
+    return;
+  }
+
+  // Loading state
   btn.disabled        = true;
   btnText.textContent = 'Signing in…';
 
-  setTimeout(function () {
-    var isValid = (email === 'admin@saarva.com' && password === 'admin123') ||
-                  (email === 'Administrator' && password === 'Admin@1234');
-    if (isValid) {
+  // Call Frappe's built-in login API
+  fetch('/api/method/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-Frappe-CSRF-Token': 'fetch'
+    },
+    body: new URLSearchParams({
+      usr: username,
+      pwd: password
+    })
+  })
+  .then(function (res) {
+    return res.json().then(function (data) {
+      return { status: res.status, data: data };
+    });
+  })
+  .then(function (result) {
+    console.log('Login API response:', result.status, result.data);
+
+    if (result.status === 200) {
+      // ✅ Login success — go to dashboard
       window.location.href = '/crm-dashboard';
     } else {
-      errorEl.textContent = '❌ Invalid email or password. Please try again.';
+      // ❌ Wrong credentials — show Frappe's error message
+      var msg = 'Invalid username or password.';
+      if (result.data) {
+        if (result.data.message)       msg = result.data.message;
+        else if (result.data.exc_type) msg = 'Incorrect password. Please try again.';
+      }
+      errorEl.textContent = '❌ ' + msg;
       btn.disabled        = false;
       btnText.textContent = 'Sign In';
     }
-  }, 800);
+  })
+  .catch(function () {
+    errorEl.textContent = '❌ Network error. Please try again.';
+    btn.disabled        = false;
+    btnText.textContent = 'Sign In';
+  });
 }
 
 /**
  * Toggle password field visibility
  */
 function togglePassword() {
-  var input   = document.getElementById('loginPassword');
-  var icon    = document.getElementById('eyeIcon');
+  var input = document.getElementById('loginPassword');
+  var icon  = document.getElementById('eyeIcon');
 
   if (input.type === 'password') {
     input.type = 'text';

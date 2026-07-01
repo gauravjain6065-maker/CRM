@@ -41,17 +41,18 @@
 
       <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
 
-        <!-- Email -->
+        <!-- Username -->
         <div class="form-group">
           <label for="loginEmail">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i> Email
+            <i class="fa-solid fa-user" aria-hidden="true"></i> Username / Email
           </label>
           <input
-            type="email"
+            type="text"
             id="loginEmail"
             name="email"
-            placeholder="admin@saarva.com"
-            autocomplete="email"
+            placeholder="Administrator"
+            value="Administrator"
+            autocomplete="username"
             required
           >
         </div>
@@ -97,6 +98,12 @@
 
         <!-- Error message -->
         <p class="login-error" id="loginError" role="alert" aria-live="polite"></p>
+
+        <!-- Credential hint -->
+        <p class="login-hint">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          Use <strong>Administrator</strong> / <strong>Admin@1234</strong>
+        </p>
 
       </form>
     </div>

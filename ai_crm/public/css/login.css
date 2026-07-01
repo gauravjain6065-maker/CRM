@@ -251,3 +251,27 @@ body.page-login {
   .login-left  { display: none; }
   .login-right { padding: 30px 20px; }
 }
+
+/* Credential hint */
+.login-hint {
+  margin-top: 16px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  background: var(--color-info-bg);
+  border: 1px solid #c7d9fd;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  line-height: 1.6;
+}
+
+.login-hint i {
+  color: var(--color-primary);
+  margin-right: 5px;
+}
+
+.login-hint strong {
+  color: var(--color-primary);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
