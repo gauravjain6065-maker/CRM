@@ -1,0 +1,305 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Lead Sources – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/lead-source.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="ls-page">
+
+  <!-- ── Top breadcrumb bar ── -->
+  <div class="ls-topbar">
+    <span>Home</span>
+    <div class="ls-topbar-user" aria-label="Logged in user">RK</div>
+  </div>
+
+  <!-- ── Main content ── -->
+  <div class="ls-content">
+
+    <!-- ── Page header ── -->
+    <header class="ls-header">
+      <div class="ls-header__left">
+        <h1>Lead Sources</h1>
+        <p>Manage online &amp; offline lead ingestion, tagging, service mapping &amp; duplicate rules.</p>
+      </div>
+      <div class="ls-header__actions">
+        <button id="lsAddSourceBtn" class="ls-btn ls-btn--primary" aria-label="Add new lead source">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i> + Add New Source
+        </button>
+        <button class="ls-btn" aria-label="Upload offline leads">
+          <i class="fa-solid fa-upload" aria-hidden="true"></i> Upload Offline Leads
+        </button>
+        <button class="ls-btn" aria-label="Manage duplicate rules">
+          <i class="fa-solid fa-copy" aria-hidden="true"></i> Duplicate Rules
+        </button>
+      </div>
+    </header>
+
+    <!-- ── Tab navigation ── -->
+    <nav class="ls-tabs" aria-label="Lead source categories" role="tablist">
+      <button class="ls-tab active" data-tab="online"    role="tab" aria-selected="true"  id="tab-online">Online Sources</button>
+      <button class="ls-tab"        data-tab="offline"   role="tab" aria-selected="false" id="tab-offline">Offline Sources</button>
+      <button class="ls-tab"        data-tab="analytics" role="tab" aria-selected="false" id="tab-analytics">Analytics</button>
+      <button class="ls-tab"        data-tab="priority"  role="tab" aria-selected="false" id="tab-priority">Priority</button>
+      <button class="ls-tab"        data-tab="duplicate" role="tab" aria-selected="false" id="tab-duplicate">Duplicate &amp; Recycle</button>
+      <button class="ls-tab"        data-tab="audit"     role="tab" aria-selected="false" id="tab-audit">Audit Trail</button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 1 – Online Sources
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel active" id="panel-online" role="tabpanel" aria-labelledby="tab-online">
+      <div class="ls-card">
+        <div class="ls-card-header">
+          <span class="ls-card-title">Online Lead Sources</span>
+          <span class="ls-badge-count">5 sources</span>
+        </div>
+        <table class="ls-table" aria-label="Online lead sources table">
+          <thead>
+            <tr>
+              <th>Source Name</th>
+              <th>Platform</th>
+              <th>Default Service</th>
+              <th>Auto-Tag</th>
+              <th>Daily Avg</th>
+              <th>Bucket</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="ls-source-name">Google Ads – PDI</span></td>
+              <td><span class="ls-platform ls-platform--paid">Paid Ads</span></td>
+              <td>Pre-Delivery Inspection</td>
+              <td><span class="ls-tag">#google_pdi</span></td>
+              <td>42</td>
+              <td>Online</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Google Ads PDI"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Google Ads – Home Buying</span></td>
+              <td><span class="ls-platform ls-platform--paid">Paid Ads</span></td>
+              <td>Home Buying Inspection</td>
+              <td><span class="ls-tag">#google_hb</span></td>
+              <td>28</td>
+              <td>Online</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Google Ads Home Buying"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Meta Ads – Seepage</span></td>
+              <td><span class="ls-platform ls-platform--paid">Paid Ads</span></td>
+              <td>Seepage Inspection</td>
+              <td><span class="ls-tag">#meta_seepage</span></td>
+              <td>19</td>
+              <td>Online</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Meta Ads Seepage"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Website Organic Form</span></td>
+              <td><span class="ls-platform ls-platform--website">Website</span></td>
+              <td>Auto-detect</td>
+              <td><span class="ls-tag">#organic</span></td>
+              <td>11</td>
+              <td>Online</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Website Organic Form"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Landing Page – Gurgaon</span></td>
+              <td><span class="ls-platform ls-platform--website">Website</span></td>
+              <td>Pre-Delivery Inspection</td>
+              <td><span class="ls-tag">#lp_gurgaon</span></td>
+              <td>16</td>
+              <td>Online</td>
+              <td><span class="ls-status ls-status--paused">Paused</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Landing Page Gurgaon"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 2 – Offline Sources
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel" id="panel-offline" role="tabpanel" aria-labelledby="tab-offline">
+      <div class="ls-card">
+        <div class="ls-card-header">
+          <span class="ls-card-title">Offline Lead Sources</span>
+          <span class="ls-badge-count">3 sources</span>
+        </div>
+        <table class="ls-table" aria-label="Offline lead sources table">
+          <thead>
+            <tr>
+              <th>Source Name</th>
+              <th>Platform</th>
+              <th>Default Service</th>
+              <th>Auto-Tag</th>
+              <th>Daily Avg</th>
+              <th>Bucket</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="ls-source-name">Referral – Builder</span></td>
+              <td><span class="ls-platform ls-platform--offline">Offline</span></td>
+              <td>General Inspection</td>
+              <td><span class="ls-tag">#ref_builder</span></td>
+              <td>8</td>
+              <td>Offline</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Referral Builder"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Walk-in – Gurugram Office</span></td>
+              <td><span class="ls-platform ls-platform--offline">Offline</span></td>
+              <td>Pre-Delivery Inspection</td>
+              <td><span class="ls-tag">#walkin_ggm</span></td>
+              <td>5</td>
+              <td>Offline</td>
+              <td><span class="ls-status ls-status--active">Active</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Walk-in Gurugram"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+            <tr>
+              <td><span class="ls-source-name">Society Camp – Dwarka</span></td>
+              <td><span class="ls-platform ls-platform--offline">Offline</span></td>
+              <td>Seepage Inspection</td>
+              <td><span class="ls-tag">#camp_dwarka</span></td>
+              <td>3</td>
+              <td>Offline</td>
+              <td><span class="ls-status ls-status--paused">Paused</span></td>
+              <td><button class="ls-edit-btn" aria-label="Edit Society Camp Dwarka"><i class="fa-solid fa-pencil" aria-hidden="true"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 3 – Analytics
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel" id="panel-analytics" role="tabpanel" aria-labelledby="tab-analytics">
+      <div class="ls-analytics-grid">
+        <div class="ls-stat-card">
+          <div class="ls-stat-card__label">Total Leads (MTD)</div>
+          <div class="ls-stat-card__value">129</div>
+          <div class="ls-stat-card__change">↗ +18% MOM</div>
+        </div>
+        <div class="ls-stat-card">
+          <div class="ls-stat-card__label">Online Sources</div>
+          <div class="ls-stat-card__value">116</div>
+          <div class="ls-stat-card__change">↗ +22% MOM</div>
+        </div>
+        <div class="ls-stat-card">
+          <div class="ls-stat-card__label">Offline Sources</div>
+          <div class="ls-stat-card__value">16</div>
+          <div class="ls-stat-card__change">↗ +5% MOM</div>
+        </div>
+        <div class="ls-stat-card">
+          <div class="ls-stat-card__label">Conversion Rate</div>
+          <div class="ls-stat-card__value">6.2%</div>
+          <div class="ls-stat-card__change">↗ +1.1% MOM</div>
+        </div>
+      </div>
+      <div class="ls-card" style="padding: 28px; text-align: center; color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        <i class="fa-solid fa-chart-bar" style="font-size:36px; margin-bottom:10px; display:block; color: var(--color-border);"></i>
+        Detailed analytics charts will load here once connected to live data.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 4 – Priority
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel" id="panel-priority" role="tabpanel" aria-labelledby="tab-priority">
+      <div class="ls-card" style="padding: 32px; text-align: center; color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        <i class="fa-solid fa-arrow-up-wide-short" style="font-size:36px; margin-bottom:10px; display:block; color: var(--color-border);"></i>
+        Drag-and-drop source priority ranking will appear here.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 5 – Duplicate & Recycle
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel" id="panel-duplicate" role="tabpanel" aria-labelledby="tab-duplicate">
+      <div class="ls-card" style="padding: 32px; text-align: center; color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        <i class="fa-solid fa-copy" style="font-size:36px; margin-bottom:10px; display:block; color: var(--color-border);"></i>
+        Duplicate detection rules and recycle bin settings will appear here.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         PANEL 6 – Audit Trail
+         ═══════════════════════════════════════════════ -->
+    <div class="ls-tab-panel" id="panel-audit" role="tabpanel" aria-labelledby="tab-audit">
+      <div class="ls-card" style="padding: 32px; text-align: center; color: var(--color-text-muted); font-size: var(--font-size-sm);">
+        <i class="fa-solid fa-clock-rotate-left" style="font-size:36px; margin-bottom:10px; display:block; color: var(--color-border);"></i>
+        Audit log of all source changes will appear here.
+      </div>
+    </div>
+
+  </div>{# /ls-content #}
+
+</div>{# /ls-page #}
+
+<!-- ══ Add New Source Modal ══════════════════════════ -->
+<div class="ls-modal-overlay" id="lsModalOverlay" role="dialog" aria-modal="true" aria-labelledby="lsModalTitle">
+  <div class="ls-modal">
+    <h2 class="ls-modal__title" id="lsModalTitle">Add New Lead Source</h2>
+
+    <div class="ls-form-group">
+      <label for="lsSourceName">Source Name <span style="color:var(--color-danger)">*</span></label>
+      <input type="text" id="lsSourceName" placeholder="e.g. Google Ads – Delhi" autocomplete="off">
+    </div>
+
+    <div class="ls-form-group">
+      <label for="lsSourcePlatform">Platform</label>
+      <select id="lsSourcePlatform">
+        <option value="">-- Select --</option>
+        <option value="Paid Ads">Paid Ads</option>
+        <option value="Website">Website</option>
+        <option value="Offline">Offline</option>
+        <option value="Social">Social Media</option>
+      </select>
+    </div>
+
+    <div class="ls-form-group">
+      <label for="lsSourceService">Default Service</label>
+      <input type="text" id="lsSourceService" placeholder="e.g. Pre-Delivery Inspection">
+    </div>
+
+    <div class="ls-form-group">
+      <label for="lsSourceTag">Auto-Tag</label>
+      <input type="text" id="lsSourceTag" placeholder="e.g. #google_pdi">
+    </div>
+
+    <div class="ls-form-group">
+      <label for="lsSourceBucket">Bucket</label>
+      <select id="lsSourceBucket">
+        <option value="Online">Online</option>
+        <option value="Offline">Offline</option>
+      </select>
+    </div>
+
+    <div class="ls-modal__footer">
+      <button class="ls-btn" id="lsModalCancel">Cancel</button>
+      <button class="ls-btn ls-btn--primary" id="lsModalSave">
+        <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> Save Source
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/lead-source.js"></script>
+{% endblock %}

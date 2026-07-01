@@ -1,0 +1,428 @@
+/* =====================================================
+   LEAD-SOURCE.CSS – Saarva Admin CRM
+   Lead Sources page specific styles
+   ===================================================== */
+
+/* ── Page wrapper ── */
+.ls-page {
+  margin-left: var(--sidebar-width);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  font-family: var(--font-main);
+  color: var(--color-text-dark);
+}
+
+/* ── Top breadcrumb bar ── */
+.ls-topbar {
+  background: var(--color-white);
+  padding: 14px 32px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ls-topbar-user {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-md);
+}
+
+/* ── Content wrapper ── */
+.ls-content {
+  padding: 28px 32px;
+}
+
+/* ── Page header ── */
+.ls-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.ls-header__left h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--color-text-darkest);
+  margin: 0 0 4px 0;
+}
+
+.ls-header__left p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.ls-header__actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.ls-btn {
+  height: 38px;
+  padding: 0 18px;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-main);
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text-body);
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ls-btn:hover {
+  background: var(--color-bg);
+  border-color: #bbb;
+}
+
+.ls-btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.ls-btn--primary:hover {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* ── Tab navigation ── */
+.ls-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.ls-tab {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text-body);
+  transition: var(--transition-fast);
+  font-family: var(--font-main);
+  user-select: none;
+}
+
+.ls-tab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ls-tab.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-primary);
+}
+
+/* ── Tab panels ── */
+.ls-tab-panel {
+  display: none;
+}
+
+.ls-tab-panel.active {
+  display: block;
+}
+
+/* ── Table card ── */
+.ls-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.ls-card-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--color-border-table);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ls-card-title {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.ls-badge-count {
+  background: var(--color-bg);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+}
+
+/* ── Table ── */
+.ls-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ls-table thead th {
+  padding: 12px 20px;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-table);
+}
+
+.ls-table tbody tr {
+  border-bottom: 1px solid var(--color-border-table);
+  transition: background var(--transition-fast);
+}
+
+.ls-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.ls-table tbody tr:hover {
+  background: var(--color-primary-light);
+}
+
+.ls-table tbody td {
+  padding: 14px 20px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-body);
+  vertical-align: middle;
+}
+
+/* ── Source name cell ── */
+.ls-source-name {
+  font-weight: 600;
+  color: var(--color-text-dark);
+  font-size: var(--font-size-base);
+}
+
+/* ── Platform badge ── */
+.ls-platform {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.ls-platform--paid {
+  color: var(--color-primary);
+  background: var(--color-info-bg);
+}
+
+.ls-platform--website {
+  color: #7c3aed;
+  background: #f5f3ff;
+}
+
+.ls-platform--offline {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+/* ── Auto-tag chip ── */
+.ls-tag {
+  display: inline-block;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Status badge ── */
+.ls-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.ls-status::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.ls-status--active {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+}
+
+.ls-status--active::before {
+  background: var(--color-success);
+}
+
+.ls-status--paused {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.ls-status--paused::before {
+  background: var(--color-warning);
+}
+
+/* ── Edit icon button ── */
+.ls-edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-warning);
+  font-size: 15px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.ls-edit-btn:hover {
+  background: var(--color-warning-bg);
+}
+
+/* ── Analytics cards (Analytics tab) ── */
+.ls-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.ls-stat-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 20px 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.ls-stat-card__label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.ls-stat-card__value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-text-darkest);
+  line-height: 1;
+}
+
+.ls-stat-card__change {
+  margin-top: 6px;
+  font-size: var(--font-size-xs);
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+/* ── Modal overlay ── */
+.ls-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: var(--z-modal);
+  align-items: center;
+  justify-content: center;
+}
+
+.ls-modal-overlay.open {
+  display: flex;
+}
+
+.ls-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  padding: 30px;
+  width: 480px;
+  max-width: 95vw;
+  box-shadow: var(--shadow-lg);
+  animation: ls-modal-in 0.2s ease;
+}
+
+@keyframes ls-modal-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ls-modal__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: var(--color-text-darkest);
+}
+
+.ls-form-group {
+  margin-bottom: 16px;
+}
+
+.ls-form-group label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-body);
+  margin-bottom: 6px;
+}
+
+.ls-form-group input,
+.ls-form-group select {
+  width: 100%;
+  height: 40px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0 12px;
+  font-size: var(--font-size-sm);
+  font-family: var(--font-main);
+  color: var(--color-text-dark);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.ls-form-group input:focus,
+.ls-form-group select:focus {
+  border-color: var(--color-primary);
+}
+
+.ls-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
