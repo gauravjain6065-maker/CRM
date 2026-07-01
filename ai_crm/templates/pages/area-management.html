@@ -1,0 +1,132 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Area Management – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/area-management.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="main-content">
+  <div class="topbar">
+    <h2>Area Management</h2>
+  </div>
+
+  <main class="area-page-body">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="page-header__title">
+        <h2>Area Management</h2>
+        <p>Manage and configure service areas</p>
+      </div>
+      <button class="btn-add-area" id="addAreaBtn">
+        + Add Area
+      </button>
+    </header>
+
+    <!-- Areas Grid -->
+    <section class="areas-grid" aria-label="Service areas">
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Andheri
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Rajesh</span>
+          <span class="area-tag">Priya</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Ravi</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Bandra
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Sneha</span>
+          <span class="area-tag">Karan</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Meera</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Powai
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Vikram</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Pooja</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Thane
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Aman</span>
+          <span class="area-tag">Sita</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Rohit</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Navi Mumbai
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Divya</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Suresh</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Goregaon
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Nikhil</span>
+          <span class="area-tag">Kavita</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Ajay</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Malad
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Ritu</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Deepak</div>
+      </article>
+
+      <article class="area-card animate-card">
+        <div class="area-card__title">
+          <span class="area-card__dot"></span> Borivali
+        </div>
+        <div class="area-card__label">Telecallers:</div>
+        <div class="area-card__tags">
+          <span class="area-tag">Manish</span>
+          <span class="area-tag">Sunita</span>
+        </div>
+        <div class="area-card__fallback">Fallback: Rahul</div>
+      </article>
+
+    </section>
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/area-management.js"></script>
+{% endblock %}

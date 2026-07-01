@@ -1,0 +1,71 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Caller Replacement – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/caller-replacement.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="main-content">
+  <div class="topbar">
+    <h2>Caller Replacement</h2>
+  </div>
+
+  <main class="caller-page-body">
+    <div class="caller-card">
+
+      <h1 class="caller-card__title">Caller Replacement</h1>
+      <p class="caller-card__subtitle">Bulk reassign leads between callers</p>
+
+      <!-- From → To Row -->
+      <div class="caller-row">
+
+        <div class="caller-field">
+          <label for="fromCaller">From Caller</label>
+          <select id="fromCaller" name="fromCaller">
+            <option value="">Select caller</option>
+            <option>Sujata</option>
+            <option>Surekha</option>
+            <option>Amit</option>
+          </select>
+        </div>
+
+        <div class="caller-arrow" aria-hidden="true">➜</div>
+
+        <div class="caller-field">
+          <label for="toCaller">To Caller</label>
+          <select id="toCaller" name="toCaller">
+            <option value="">Select caller</option>
+            <option>Ramesh</option>
+            <option>Shivam</option>
+            <option>Khushi</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Lead Type -->
+      <div class="caller-field caller-field--full">
+        <label for="leadType">Lead Type</label>
+        <select id="leadType" name="leadType">
+          <option>All Leads</option>
+          <option>Hot Leads</option>
+          <option>Cold Leads</option>
+        </select>
+      </div>
+
+      <!-- Reassign Button -->
+      <button class="btn-reassign" onclick="handleReassign()">
+        👤 Reassign Leads
+      </button>
+
+    </div>
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/caller-replacement.js"></script>
+{% endblock %}

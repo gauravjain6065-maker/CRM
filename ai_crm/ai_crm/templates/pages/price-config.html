@@ -1,0 +1,131 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Price Config – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/price-config.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="price-wrapper">
+
+  <!-- Sidebar is included via base.html -->
+
+  <!-- Main Content -->
+  <main class="price-main-content">
+
+    <!-- Page Header -->
+    <header class="price-header">
+      <h1>Price Config</h1>
+      <p>Manage and resolve pricing conflicts</p>
+    </header>
+
+    <!-- Tabs -->
+    <div class="tabs-row">
+      <div class="tabs-group" role="tablist">
+        <button class="tab-btn active" role="tab" aria-selected="true"  onclick="switchTab('base', this)">Base Pricing</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" onclick="switchTab('area', this)">Area Multipliers</button>
+        <button class="tab-btn"        role="tab" aria-selected="false" onclick="switchTab('property', this)">Property Type Multipliers</button>
+      </div>
+    </div>
+
+    <!-- Actions Row -->
+    <div class="price-actions-row">
+      <button class="btn-preview">👁 Preview Calculator</button>
+      <button class="btn-add-service">+ Add Service</button>
+    </div>
+
+    <!-- Tab: Base Pricing -->
+    <section class="tab-content active" id="tab-base" role="tabpanel">
+      <div class="price-table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Price per Sq Ft</th>
+              <th>Visit Fee</th>
+              <th>Early Bird Discount</th>
+              <th>Advance Payment</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PDI</td>
+              <td>₹ 5/sq ft</td>
+              <td>₹ 500</td>
+              <td>10%</td>
+              <td>30%</td>
+              <td><button class="edit-btn" aria-label="Edit PDI">✏️</button></td>
+            </tr>
+            <tr>
+              <td>Home Buying</td>
+              <td>₹ 6/sq ft</td>
+              <td>₹ 600</td>
+              <td>10%</td>
+              <td>30%</td>
+              <td><button class="edit-btn" aria-label="Edit Home Buying">✏️</button></td>
+            </tr>
+            <tr>
+              <td>Seepage</td>
+              <td>₹ 4/sq ft</td>
+              <td>₹ 350</td>
+              <td>10%</td>
+              <td>30%</td>
+              <td><button class="edit-btn" aria-label="Edit Seepage">✏️</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab: Area Multipliers -->
+    <section class="tab-content" id="tab-area" role="tabpanel">
+      <div class="price-table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Area</th><th>Multiplier</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mumbai</td><td>1.5x</td>
+              <td><button class="edit-btn" aria-label="Edit Mumbai">✏️</button></td>
+            </tr>
+            <tr>
+              <td>Pune</td><td>1.2x</td>
+              <td><button class="edit-btn" aria-label="Edit Pune">✏️</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab: Property Type Multipliers -->
+    <section class="tab-content" id="tab-property" role="tabpanel">
+      <div class="price-table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Property Type</th><th>Multiplier</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apartment</td><td>1.0x</td>
+              <td><button class="edit-btn" aria-label="Edit Apartment">✏️</button></td>
+            </tr>
+            <tr>
+              <td>Villa</td><td>1.3x</td>
+              <td><button class="edit-btn" aria-label="Edit Villa">✏️</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/price-config.js"></script>
+{% endblock %}

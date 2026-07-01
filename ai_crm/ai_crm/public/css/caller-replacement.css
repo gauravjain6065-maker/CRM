@@ -1,0 +1,94 @@
+/* =====================================================
+   CALLER-REPLACEMENT.CSS – Saarva Admin CRM
+   Caller Replacement page specific styles
+   ===================================================== */
+
+.caller-page-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - var(--topbar-height));
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #fff6e8, #f3e7d3);
+}
+
+/* ── Card ── */
+.caller-card {
+  width: 520px;
+  background: var(--color-white);
+  padding: 30px;
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+}
+
+.caller-card__title    { font-size: var(--font-size-2xl); font-weight: 700; color: var(--color-text-dark); margin-bottom: 4px; }
+.caller-card__subtitle { font-size: var(--font-size-base); color: var(--color-text-faint); margin-bottom: 24px; }
+
+/* ── Row / Fields ── */
+.caller-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.caller-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.caller-field label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-body);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.caller-field select {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  background: var(--color-white);
+  font-family: var(--font-main);
+  font-size: var(--font-size-base);
+  color: var(--color-text-mid);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.caller-field select:focus { border-color: var(--color-primary); }
+
+.caller-arrow {
+  font-size: 20px;
+  margin-top: 22px;
+  color: var(--color-text-placeholder);
+}
+
+.caller-field--full { margin-bottom: 22px; }
+
+/* ── Reassign Button ── */
+.btn-reassign {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(90deg, var(--color-orange-alt), var(--color-orange-light));
+  color: var(--color-white);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  font-family: var(--font-main);
+}
+
+.btn-reassign:hover  { opacity: 0.92; transform: translateY(-1px); }
+.btn-reassign:active { transform: translateY(0); }
+
+@media (max-width: 600px) {
+  .caller-card  { width: 100%; }
+  .caller-row   { flex-direction: column; }
+  .caller-arrow { display: none; }
+}

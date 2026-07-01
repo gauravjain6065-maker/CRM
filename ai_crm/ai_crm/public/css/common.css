@@ -1,0 +1,146 @@
+/* =====================================================
+   COMMON.CSS – Saarva Admin CRM
+   Reset + Base + Typography + Utilities
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg);
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Base Elements ── */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-main);
+  border: none;
+  background: none;
+}
+
+input,
+select,
+textarea {
+  font-family: var(--font-main);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* ── Typography ── */
+h1 { font-size: var(--font-size-5xl); font-weight: 700; color: var(--color-text-darkest); }
+h2 { font-size: 30px;                 font-weight: 600; color: var(--color-text-dark); }
+h3 { font-size: var(--font-size-xl);  font-weight: 600; color: var(--color-text-dark); }
+h4 { font-size: var(--font-size-lg);  font-weight: 600; }
+h5 { font-size: var(--font-size-md);  font-weight: 600; }
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+}
+
+p {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-md);
+}
+
+/* ── Utility: Badges ── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.badge-telecaller  { background: var(--color-info-bg);    color: var(--color-info); }
+.badge-mining      { background: var(--color-warning-bg);  color: var(--color-warning); }
+.badge-teamleader  { background: var(--color-success-bg);  color: var(--color-success); }
+
+.status-active {
+  background: #1d4ed8;
+  color: var(--color-white);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.status-inactive {
+  background: #fef3c7;
+  color: #b45309;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+/* ── Utility: Tables ── */
+thead tr {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border-table);
+}
+
+thead th {
+  padding: 14px 20px;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--color-text-faint);
+  text-align: left;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f8f8f8;
+  transition: background var(--transition-fast);
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover      { background: #fafafa; }
+
+tbody td {
+  padding: 16px 20px;
+  font-size: var(--font-size-md);
+  color: var(--color-text-dark);
+  vertical-align: middle;
+}
+
+/* ── Utility: Scrollbars ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: #c7c7c7; border-radius: 20px; }
+::-webkit-scrollbar-track { background: transparent; }

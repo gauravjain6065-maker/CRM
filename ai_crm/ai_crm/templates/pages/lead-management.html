@@ -1,0 +1,179 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Lead Management – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/lead-management.css">
+{% endblock %}
+
+{% block page_content %}
+<main class="lead-main-page">
+
+  <!-- Header 1: Tab Navigation -->
+  <nav class="lead-header1" aria-label="Lead management tabs">
+    <div class="lead-tab-brand">LeadCall CRM</div>
+    <div class="lead-tab active">Performance</div>
+    <div class="lead-tab">Today's Action</div>
+    <div class="lead-tab">Fresh Leads</div>
+    <div class="lead-tab">Follow-ups</div>
+    <div class="lead-tab">TL Dashboard</div>
+    <div class="lead-tab">Hub Manager</div>
+    <div class="lead-tab">Admin</div>
+    <div class="lead-tab">Notification</div>
+    <div class="lead-tab">User</div>
+  </nav>
+
+  <!-- Header 2: Filters -->
+  <div class="lead-header2">
+    <div class="lead-filter-group">
+      <div class="lead-filter-label">DATE</div>
+      <div class="lead-filter-label">
+        <select aria-label="Select month">
+          <option>This Month</option>
+          <option>January</option>
+          <option>February</option>
+          <option>March</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="lead-filter-group">
+      <div class="lead-priority-label">⏳ PRIORITY</div>
+      <div class="lead-priority-tag">🔴 Hot</div>
+      <div class="lead-priority-tag">🟠 Warm</div>
+      <div class="lead-priority-tag">🔵 Cold</div>
+    </div>
+
+    <div class="lead-filter-group">
+      <div class="lead-filter-label">SORT BY</div>
+      <div class="lead-filter-label">
+        <select aria-label="Sort by">
+          <option>All Cases</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="lead-filter-group">
+      <div class="lead-filter-label">ORDER BY</div>
+      <div class="lead-filter-label">
+        <select aria-label="Order by">
+          <option>Call Made</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header 3: Stat Boxes -->
+  <div class="lead-header3" aria-label="Key performance stats">
+
+    <div class="lead-stat-box">
+      <div class="lead-stat-inner">
+        <div class="lead-stat-name">MTD Calls Made</div>
+        <div class="lead-stat-value">156</div>
+        <div class="lead-stat-change">
+          <p style="color:green;">↗ +84%</p> MOM
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-stat-box">
+      <div class="lead-stat-inner">
+        <div class="lead-stat-name">Follow-ups Done</div>
+        <div class="lead-stat-value">42</div>
+        <div class="lead-stat-change">
+          <p style="color:green;">↗ +73%</p> MOM
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-stat-box highlight-orange">
+      <div class="lead-stat-inner">
+        <div class="lead-stat-name">Hot Leads Passed</div>
+        <div class="lead-stat-value">18</div>
+        <div class="lead-stat-change">
+          <p style="color:green;">↗ +93%</p> MOM
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-stat-box">
+      <div class="lead-stat-inner">
+        <div class="lead-stat-name">Visits Booked</div>
+        <div class="lead-stat-value">12</div>
+        <div class="lead-stat-change">
+          <p style="color:green;">↗ +33%</p> MOM
+        </div>
+      </div>
+    </div>
+
+    <div class="lead-stat-box highlight-green">
+      <div class="lead-stat-inner">
+        <div class="lead-stat-name">Conversions</div>
+        <div class="lead-stat-value">$245</div>
+        <div class="lead-stat-change lead-stat-extra">
+          7 Deals <p style="color:green;">↗ +49% MOM</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Section -->
+  <div class="lead-bottom">
+
+    <!-- Monthly Call Target -->
+    <div class="lead-target-box">
+      <div class="lead-box-inner">
+        <div class="lead-box-header">
+          <div class="lead-target-title">🎯 Monthly Call Target</div>
+        </div>
+        <div class="lead-target-nums">
+          <div class="lead-target-value">100</div>
+          <div class="lead-target-total">/200</div>
+        </div>
+        <div class="lead-progress-bar">
+          <div class="lead-bar-blue"></div>
+          <div class="lead-bar-orange"></div>
+        </div>
+        <div class="lead-progress-labels">
+          <div class="lead-label-blue">78% Achieved</div>
+          <div class="lead-label-purple">Projected 100%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOM Comparison Chart -->
+    <div class="lead-chart-box">
+      <div class="lead-box-inner">
+        <div class="lead-box-header">
+          <div class="lead-target-title">Month-over-Month Comparison</div>
+        </div>
+        <div class="lead-chart-wrapper">
+          <canvas id="momChart" role="img" aria-label="Month over month comparison bar chart"></canvas>
+        </div>
+        <div class="lead-chart-legend">
+          <span><span class="legend-dot" style="background:#2a78d6;"></span>This Month</span>
+          <span><span class="legend-dot" style="background:#c8c2b0;"></span>Last Month</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="lead-footer">
+    <button class="lead-footer-btn">Start Today's Calling</button>
+  </footer>
+
+</main>
+{% endblock %}
+
+{% block page_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="/assets/ai_crm/js/lead-management.js"></script>
+{% endblock %}

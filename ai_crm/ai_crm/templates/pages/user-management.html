@@ -1,0 +1,154 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}User Management – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/user-management.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="main-content">
+  <main class="user-mgmt-container">
+
+    <!-- Header -->
+    <header class="user-header">
+      <div class="user-header__left">
+        <h1>User Management</h1>
+        <p>Manage telecallers, TLs, and admins</p>
+      </div>
+      <button class="btn-add-user">
+        <i class="fa-solid fa-plus" aria-hidden="true"></i> Add User
+      </button>
+    </header>
+
+    <!-- Filters -->
+    <div class="user-filters">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+        <input
+          type="search"
+          id="userSearch"
+          placeholder="Search users…"
+          aria-label="Search users"
+        >
+      </div>
+      <div class="role-filter">
+        <i class="fa-solid fa-filter filter-icon" aria-hidden="true"></i>
+        <select id="roleSelect" aria-label="Filter by role">
+          <option>All Roles</option>
+          <option>Telecaller</option>
+          <option>Mining Caller</option>
+          <option>Team Leader</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="user-table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Areas Assigned</th>
+            <th>Daily Lead Cap</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+
+          <tr>
+            <td>
+              <div class="user-name">Rajesh Kumar</div>
+              <div class="user-email">rajesh@saarva.com</div>
+            </td>
+            <td><span class="badge badge-telecaller">Telecaller</span></td>
+            <td><span class="status-active">Active</span></td>
+            <td>
+              <div class="area-tags">
+                <span class="area-tag-chip">Andheri</span>
+                <span class="area-tag-chip">Bandra</span>
+              </div>
+            </td>
+            <td>50</td>
+            <td><button class="actions-btn" aria-label="Actions for Rajesh Kumar">•••</button></td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="user-name">Priya Sharma</div>
+              <div class="user-email">priya@saarva.com</div>
+            </td>
+            <td><span class="badge badge-telecaller">Telecaller</span></td>
+            <td><span class="status-active">Active</span></td>
+            <td>
+              <div class="area-tags">
+                <span class="area-tag-chip">Powai</span>
+                <span class="area-tag-chip">Thane</span>
+              </div>
+            </td>
+            <td>45</td>
+            <td><button class="actions-btn" aria-label="Actions for Priya Sharma">•••</button></td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="user-name">Amit Patel</div>
+              <div class="user-email">amit@saarva.com</div>
+            </td>
+            <td><span class="badge badge-mining">Mining Caller</span></td>
+            <td><span class="status-active">Active</span></td>
+            <td>
+              <div class="area-tags">
+                <span class="area-tag-chip">Navi Mumbai</span>
+              </div>
+            </td>
+            <td>30</td>
+            <td><button class="actions-btn" aria-label="Actions for Amit Patel">•••</button></td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="user-name">Sneha Desai</div>
+              <div class="user-email">sneha@saarva.com</div>
+            </td>
+            <td><span class="badge badge-teamleader">Team Leader</span></td>
+            <td><span class="status-active">Active</span></td>
+            <td>
+              <div class="area-tags">
+                <span class="area-tag-chip">All</span>
+              </div>
+            </td>
+            <td>100</td>
+            <td><button class="actions-btn" aria-label="Actions for Sneha Desai">•••</button></td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="user-name">Vikram Singh</div>
+              <div class="user-email">vikram@saarva.com</div>
+            </td>
+            <td><span class="badge badge-telecaller">Telecaller</span></td>
+            <td><span class="status-inactive">Inactive</span></td>
+            <td>
+              <div class="area-tags">
+                <span class="area-tag-chip">Goregaon</span>
+              </div>
+            </td>
+            <td>40</td>
+            <td><button class="actions-btn" aria-label="Actions for Vikram Singh">•••</button></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/user-management.js"></script>
+{% endblock %}
