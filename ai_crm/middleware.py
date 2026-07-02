@@ -18,7 +18,7 @@ def check_guest_access():
     """
     Middleware that runs before every request.
     Redirects Guest users to /login if they try to access a protected page.
-    Registered in hooks.py as: before_request = ["ai_crm.middleware.check_guest_access"]
+    Uses raise frappe.Redirect to STOP further request processing immediately.
     """
     if frappe.session.user != "Guest":
         return  # logged-in user, allow through
@@ -29,5 +29,5 @@ def check_guest_access():
         return
 
     if path in PROTECTED_ROUTES:
-        frappe.local.response["type"] = "redirect"
-        frappe.local.response["location"] = f"/login?redirect-to={path}"
+        frappe.local.flags.redirect_location = f"/login?redirect-to={path}"
+        raise frappe.Redirect  # ← This STOPS the request and forces a redirect
