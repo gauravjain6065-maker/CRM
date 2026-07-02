@@ -1,4 +1,12 @@
-template = "templates/pages/lead-source.html"
+# import frappe
 
-def get_context(context):
-    context.no_cache = 1
+#    def get_context(context):
+#        if frappe.session.user == "Guest":
+#            frappe.local.flags.redirect_location = "/login?redirect-to=/area-management"
+#            raise frappe.Redirect
+import frappe
+
+   def get_context(context):
+       if frappe.session.user == "Guest":
+           frappe.local.flags.redirect_location = "/login?redirect-to=/area-management"
+           raise frappe.Redirect
