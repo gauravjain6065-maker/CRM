@@ -1,9 +1,8 @@
-# template = "templates/pages/lead-management.html"
+from ai_crm.utils.auth import require_login
 
-# def get_context(context):
-#     context.no_cache = 1
-import frappe
+no_cache = 1
+
+template = "templates/pages/lead-management.html"
+
 def get_context(context):
-      if frappe.session.user == "Guest":
-        frappe.local.flags.redirect_location = "/login?redirect-to=/area-management"
-        raise frappe.Redirect
+    require_login("/lead-management")
