@@ -29,6 +29,9 @@ function handleLogin(e) {
   btn.disabled        = true;
   btnText.textContent = 'Signing in…';
 
+  // Resolve username → email for known users
+  var loginUsr = resolveUsername(username);
+
   // Call Frappe's built-in login API
   fetch('/api/method/login', {
     method: 'POST',
@@ -37,7 +40,7 @@ function handleLogin(e) {
       'X-Frappe-CSRF-Token': 'fetch'
     },
     body: new URLSearchParams({
-      usr: username,
+      usr: loginUsr,
       pwd: password
     })
   })
@@ -80,6 +83,19 @@ function handleLogin(e) {
     btn.disabled        = false;
     btnText.textContent = 'Sign In';
   });
+}
+
+/**
+ * Maps short usernames to their Frappe email
+ * Frappe login API needs the email, not the username
+ */
+function resolveUsername(username) {
+  var lower = username.toLowerCase();
+  var map = {
+    'tellecaller': 'tellecaller@saarva.com',
+    'administrator': 'Administrator'
+  };
+  return map[lower] || username;
 }
 
 /**

@@ -1,9 +1,8 @@
 import sys
 import os
-import hashlib
 
-os.chdir('/home/gaurav/frappe-bench/sites')
 sys.path.insert(0, '/home/gaurav/frappe-bench/apps/frappe')
+os.chdir('/home/gaurav/frappe-bench/sites')
 
 import frappe
 from frappe.utils.password import update_password
@@ -11,37 +10,43 @@ from frappe.utils.password import update_password
 frappe.init(site='crm.local', sites_path='/home/gaurav/frappe-bench/sites')
 frappe.connect()
 
-email = 'tellecaller@saarva.com'
-
 # Check if user exists
-exists = frappe.db.sql("SELECT name FROM `tabUser` WHERE name=%s", (email,))
+result = frappe.db.sql(
+    "SELECT name, username, user_type, enabled FROM `tabUser` WHERE name='tellecaller@saarva.com' OR username='tellecaller'",
+    as_dict=True
+)
+print("=== User Check ===")
+print("Found:", result)
 
-if exists:
-    print("User exists, resetting password...")
-    # Update username
-    frappe.db.sql("UPDATE `tabUser` SET username='tellecaller' WHERE name=%s", (email,))
-    # Set password using Frappe's method (bypasses queue)
-    update_password(email, 'tellecaller@1234')
+if result:
+    print("\nUser EXISTS. Resetting password...")
+    update_password('tellecaller@saarva.com', 'tellecaller@1234')
+    # Make sure user is enabled
+    frappe.db.sql("UPDATE `tabUser` SET enabled=1, username='tellecaller' WHERE name='tellecaller@saarva.com'")
     frappe.db.commit()
-    print("Password reset to tellecaller@1234")
+    print("Password reset done.")
 else:
-    # Insert user directly via SQL
+    print("\nUser NOT FOUND. Creating now...")
     frappe.db.sql("""
         INSERT INTO `tabUser`
-            (name, email, first_name, last_name, username, user_type,
-             enabled, send_welcome_email, creation, modified, owner, modified_by)
+        (name, email, first_name, last_name, username, user_type, enabled,
+         send_welcome_email, new_password, creation, modified, owner, modified_by, docstatus)
         VALUES
-            (%s, %s, 'Tele', 'Caller', 'tellecaller', 'Website User',
-             1, 0, NOW(), NOW(), 'Administrator', 'Administrator')
-    """, (email, email))
+        ('tellecaller@saarva.com', 'tellecaller@saarva.com', 'Tele', 'Caller',
+         'tellecaller', 'Website User', 1, 0, '', NOW(), NOW(),
+         'Administrator', 'Administrator', 0)
+    """)
     frappe.db.commit()
+    update_password('tellecaller@saarva.com', 'tellecaller@1234')
+    frappe.db.commit()
+    print("User created successfully!")
 
-    # Set password
-    update_password(email, 'tellecaller@1234')
-    frappe.db.commit()
-    print("SUCCESS: Telecaller user created!")
-    print("  Email   : tellecaller@saarva.com")
-    print("  Username: tellecaller")
-    print("  Password: tellecaller@1234")
+# Verify password entry
+pwd_check = frappe.db.sql(
+    "SELECT name, `user` FROM `__Auth` WHERE `user`='tellecaller@saarva.com' AND `doctype`='User'",
+    as_dict=True
+)
+print("\n=== Password Entry ===")
+print("Auth record:", pwd_check)
 
 frappe.destroy()
