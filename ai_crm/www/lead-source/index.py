@@ -1,13 +1,8 @@
-import frappe
+from ai_crm.utils.auth import require_login
+
+no_cache = 1
 
 template = "templates/pages/lead-source.html"
 
 def get_context(context):
-    context.no_cache = 1
-    
-    # Restrict to CRM Admin / Administrator
-    user = frappe.session.user
-    roles = frappe.get_roles(user)
-    if "CRM Admin" not in roles and user != "Administrator":
-        frappe.local.flags.redirect_location = "/lead-management"
-        raise frappe.Redirect
+    require_login("/lead-source")

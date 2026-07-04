@@ -196,7 +196,7 @@ home_page = "login"
 
 # Request Events
 # ----------------
-# before_request = ["ai_crm.utils.before_request"]
+before_request = ["ai_crm.middleware.check_guest_access"]
 # after_request = ["ai_crm.utils.after_request"]
 
 # Job Events
