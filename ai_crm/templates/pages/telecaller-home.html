@@ -1,103 +1,207 @@
-{% extends "templates/ai_crm_base.html" %}
 {% set show_custom_sidebar = False %}
+{% extends "templates/ai_crm_base.html" %}
 
-{% block page_title %}Telecaller Home – Saarva CRM{% endblock %}
-{% block body_class %}telecaller-home{% endblock %}
+{% block page_title %}Follow-up Calls – LeadCall CRM{% endblock %}
+{% block body_class %}tc-dashboard{% endblock %}
 
 {% block page_css %}
 <link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css">
 {% endblock %}
 
 {% block page_content %}
-<div class="tc-wrapper">
+<div class="tc-app">
 
-  <!-- Top Bar -->
-  <header class="tc-topbar">
-    <div class="tc-topbar__brand">
-      <i class="fa-solid fa-chart-line"></i>
-      <span>Saarva CRM</span>
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="tc-navbar">
+    <div class="tc-navbar__brand">
+      <div class="tc-brand-icon"><i class="fa-solid fa-phone-volume"></i></div>
+      <span class="tc-brand-name">LeadCall CRM</span>
     </div>
-    <button class="tc-logout-btn" onclick="handleLogout()">
-      <i class="fa-solid fa-right-from-bracket"></i> Logout
-    </button>
+
+    <nav class="tc-navbar__tabs">
+      <a href="#" class="tc-tab">
+        <i class="fa-solid fa-chart-simple"></i> Performance
+      </a>
+      <a href="#" class="tc-tab">
+        <i class="fa-solid fa-bolt"></i> Today's Actions
+      </a>
+      <a href="#" class="tc-tab">
+        <i class="fa-solid fa-user-plus"></i> Fresh Leads
+      </a>
+      <a href="#" class="tc-tab tc-tab--active">
+        <i class="fa-solid fa-rotate"></i> Follow-ups
+      </a>
+    </nav>
+
+    <div class="tc-navbar__right">
+      <button class="tc-notif-btn" id="notifBtn">
+        <i class="fa-solid fa-bell"></i>
+        <span class="tc-badge">2</span>
+      </button>
+      <div class="tc-user-pill">
+        <div class="tc-user-avatar">RS</div>
+        <div class="tc-user-info">
+          <span class="tc-user-name">Rahul Sharma</span>
+          <span class="tc-user-role">Telecaller</span>
+        </div>
+      </div>
+      <button class="tc-logout" onclick="handleLogout()" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
   </header>
 
-  <!-- Hero Welcome Section -->
+  <!-- ===== MAIN CONTENT ===== -->
   <main class="tc-main">
 
-    <div class="tc-hero">
-      <div class="tc-avatar">
-        <i class="fa-solid fa-headset"></i>
-      </div>
-      <h1 class="tc-hello">Hello, Telecaller! 👋</h1>
-      <p class="tc-subtitle">Welcome to your Saarva CRM workspace. Ready to make calls today?</p>
-    </div>
-
-    <!-- Quick Stats Row -->
-    <div class="tc-stats">
-      <div class="tc-stat-card">
-        <div class="tc-stat-icon" style="background:#eff6ff;color:#2563eb;">
-          <i class="fa-solid fa-phone"></i>
-        </div>
-        <div class="tc-stat-info">
-          <h3>0</h3>
-          <p>Calls Today</p>
-        </div>
-      </div>
-      <div class="tc-stat-card">
-        <div class="tc-stat-icon" style="background:#f0fdf4;color:#16a34a;">
-          <i class="fa-solid fa-user-check"></i>
-        </div>
-        <div class="tc-stat-info">
-          <h3>0</h3>
-          <p>Leads Handled</p>
-        </div>
-      </div>
-      <div class="tc-stat-card">
-        <div class="tc-stat-icon" style="background:#fef3c7;color:#d97706;">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-        </div>
-        <div class="tc-stat-info">
-          <h3>0</h3>
-          <p>Follow-ups Due</p>
+    <!-- Page Title -->
+    <div class="tc-page-header">
+      <div class="tc-page-title">
+        <i class="fa-solid fa-rotate tc-spin-icon"></i>
+        <div>
+          <h1>Follow-up Calls</h1>
+          <p>2 callbacks and follow-ups pending</p>
         </div>
       </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="tc-actions">
-      <h2>Quick Actions</h2>
-      <div class="tc-action-grid">
-        <button class="tc-action-btn">
-          <i class="fa-solid fa-phone-volume"></i>
-          <span>Start Calling</span>
-        </button>
-        <button class="tc-action-btn">
-          <i class="fa-solid fa-list-check"></i>
-          <span>My Leads</span>
-        </button>
-        <button class="tc-action-btn">
-          <i class="fa-solid fa-calendar-check"></i>
-          <span>Follow-ups</span>
-        </button>
-        <button class="tc-action-btn">
-          <i class="fa-solid fa-chart-simple"></i>
-          <span>My Report</span>
-        </button>
+    <!-- Filter Tabs -->
+    <div class="tc-filter-tabs">
+      <button class="tc-ftab tc-ftab--active" id="tabAll">All (2)</button>
+      <button class="tc-ftab" id="tabOverdue">
+        <span class="tc-dot tc-dot--red"></span> Overdue (0)
+      </button>
+      <button class="tc-ftab" id="tabToday">
+        <i class="fa-solid fa-calendar-day"></i> Today (0)
+      </button>
+    </div>
+
+    <!-- Advanced Filters Row -->
+    <div class="tc-filters">
+      <div class="tc-filter-group">
+        <label>DATE</label>
+        <div class="tc-select-wrap">
+          <i class="fa-regular fa-calendar"></i>
+          <select id="filterDate">
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>PRIORITY</label>
+        <div class="tc-priority-pills">
+          <button class="tc-ppill tc-ppill--hot active" id="pillHot">🔥 Hot</button>
+          <button class="tc-ppill tc-ppill--warm active" id="pillWarm">🟡 Warm</button>
+          <button class="tc-ppill tc-ppill--cold active" id="pillCold">🔵 Cold</button>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SERVICE</label>
+        <div class="tc-select-wrap">
+          <select id="filterService">
+            <option>All Services</option>
+            <option>Home Buying</option>
+            <option>Seepage</option>
+            <option>Rental</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SORT BY</label>
+        <div class="tc-select-wrap">
+          <i class="fa-solid fa-arrow-up-wide-short"></i>
+          <select id="filterSort">
+            <option>All Cases</option>
+            <option>Hot First</option>
+            <option>Newest First</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>ORDER BY</label>
+        <div class="tc-select-wrap">
+          <select id="filterOrder">
+            <option>Callback Time</option>
+            <option>Lead ID</option>
+            <option>Name</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group tc-filter-group--search">
+        <label>SEARCH</label>
+        <div class="tc-select-wrap tc-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search Lead ID, Area, Name..." />
+        </div>
       </div>
     </div>
+
+    <!-- Lead Cards -->
+    <div class="tc-leads" id="leadsList">
+
+      <div class="tc-lead-card" data-priority="warm">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0040</span>
+            <span class="tc-priority-badge tc-priority-badge--warm">WARM</span>
+            <span class="tc-service-tag">Home Buying</span>
+          </div>
+          <h2 class="tc-lead-name">Kavita Joshi</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Andheri</span>
+            <span><i class="fa-solid fa-person-walking"></i> Walk-in</span>
+            <span><i class="fa-regular fa-clock"></i> in 1 day</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <div class="tc-calls-count">
+            <span class="tc-calls-num">2</span>
+            <span class="tc-calls-label">Calls</span>
+          </div>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0040', 'Kavita Joshi')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+      <div class="tc-lead-card" data-priority="warm">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0007</span>
+            <span class="tc-priority-badge tc-priority-badge--warm">WARM</span>
+            <span class="tc-service-tag">Seepage</span>
+          </div>
+          <h2 class="tc-lead-name">Deepak Reddy</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Bandra</span>
+            <span><i class="fa-solid fa-headset"></i> JustDial</span>
+            <span><i class="fa-regular fa-clock"></i> in 2 days</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <div class="tc-calls-count">
+            <span class="tc-calls-num">4</span>
+            <span class="tc-calls-label">Calls</span>
+          </div>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0007', 'Deepak Reddy')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+    </div><!-- #leadsList -->
 
   </main>
-
 </div>
 {% endblock %}
 
 {% block page_js %}
-<script>
-  function handleLogout() {
-    fetch('/api/method/logout', { method: 'POST' })
-      .then(function() { window.location.href = '/login'; })
-      .catch(function() { window.location.href = '/login'; });
-  }
-</script>
+<script src="/assets/ai_crm/js/telecaller-home.js"></script>
 {% endblock %}
