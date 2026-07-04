@@ -1,0 +1,100 @@
+{
+    "name": "CRM Lead Source",
+    "doctype": "DocType",
+    "module": "ai_crm",
+    "custom": 0,
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "issingle": 0,
+    "istable": 0,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Admin",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Telecaller",
+            "create": 0,
+            "delete": 0,
+            "email": 1,
+            "export": 0,
+            "import": 0,
+            "print": 1,
+            "read": 1,
+            "report": 0,
+            "share": 0,
+            "write": 0
+        }
+    ],
+    "fields": [
+        {
+            "fieldname": "source_name",
+            "fieldtype": "Data",
+            "label": "Source Name",
+            "reqd": 1
+        },
+        {
+            "fieldname": "cost_per_lead",
+            "fieldtype": "Currency",
+            "label": "Cost Per Lead",
+            "default": 0
+        },
+        {
+            "fieldname": "active",
+            "fieldtype": "Check",
+            "label": "Active",
+            "default": 1
+        },
+        {
+            "fieldname": "platform",
+            "fieldtype": "Select",
+            "label": "Platform",
+            "options": "Paid Ads\nWebsite\nOffline\nSocial Media"
+        },
+        {
+            "fieldname": "default_service",
+            "fieldtype": "Data",
+            "label": "Default Service"
+        },
+        {
+            "fieldname": "auto_tag",
+            "fieldtype": "Data",
+            "label": "Auto-Tag"
+        },
+        {
+            "fieldname": "daily_avg",
+            "fieldtype": "Int",
+            "label": "Daily Avg",
+            "default": 0
+        },
+        {
+            "fieldname": "bucket",
+            "fieldtype": "Select",
+            "label": "Bucket",
+            "options": "Online\nOffline",
+            "default": "Online"
+        }
+    ]
+}

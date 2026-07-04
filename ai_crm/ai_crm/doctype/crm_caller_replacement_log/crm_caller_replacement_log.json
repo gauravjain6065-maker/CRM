@@ -1,0 +1,86 @@
+{
+    "name": "CRM Caller Replacement Log",
+    "doctype": "DocType",
+    "module": "ai_crm",
+    "custom": 0,
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "issingle": 0,
+    "istable": 0,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Admin",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Telecaller",
+            "create": 0,
+            "delete": 0,
+            "email": 1,
+            "export": 0,
+            "import": 0,
+            "print": 1,
+            "read": 1,
+            "report": 0,
+            "share": 0,
+            "write": 0
+        }
+    ],
+    "fields": [
+        {
+            "fieldname": "from_user",
+            "fieldtype": "Link",
+            "label": "From Telecaller",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "to_user",
+            "fieldtype": "Link",
+            "label": "To Telecaller",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "lead_count",
+            "fieldtype": "Int",
+            "label": "Lead Count",
+            "default": 0
+        },
+        {
+            "fieldname": "date",
+            "fieldtype": "Datetime",
+            "label": "Transfer Date",
+            "reqd": 1
+        },
+        {
+            "fieldname": "done_by",
+            "fieldtype": "Link",
+            "label": "Done By",
+            "options": "User",
+            "reqd": 1
+        }
+    ]
+}

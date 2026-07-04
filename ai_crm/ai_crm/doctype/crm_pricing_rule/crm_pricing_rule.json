@@ -1,0 +1,93 @@
+{
+    "name": "CRM Pricing Rule",
+    "doctype": "DocType",
+    "module": "ai_crm",
+    "custom": 0,
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "issingle": 0,
+    "istable": 0,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Admin",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Telecaller",
+            "create": 0,
+            "delete": 0,
+            "email": 1,
+            "export": 0,
+            "import": 0,
+            "print": 1,
+            "read": 1,
+            "report": 0,
+            "share": 0,
+            "write": 0
+        }
+    ],
+    "fields": [
+        {
+            "fieldname": "service_name",
+            "fieldtype": "Select",
+            "label": "Service Name",
+            "options": "Home Buying\nSeepage\nPDI\nOther",
+            "reqd": 1
+        },
+        {
+            "fieldname": "base_price",
+            "fieldtype": "Currency",
+            "label": "Base Price",
+            "reqd": 1
+        },
+        {
+            "fieldname": "discount_percent",
+            "fieldtype": "Percent",
+            "label": "Discount Percent",
+            "default": 0
+        },
+        {
+            "fieldname": "valid_from",
+            "fieldtype": "Date",
+            "label": "Valid From"
+        },
+        {
+            "fieldname": "valid_to",
+            "fieldtype": "Date",
+            "label": "Valid To"
+        },
+        {
+            "fieldname": "active",
+            "fieldtype": "Check",
+            "label": "Active",
+            "default": 1
+        },
+        {
+            "fieldname": "applicable_area_range",
+            "fieldtype": "Data",
+            "label": "Applicable Area Range"
+        }
+    ]
+}
