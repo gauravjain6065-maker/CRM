@@ -1,0 +1,279 @@
+{% set show_custom_sidebar = False %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Performance Overview – LeadCall CRM{% endblock %}
+{% block body_class %}tc-dashboard{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css?v=1.3">
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-performance.css?v=1.0">
+{% endblock %}
+
+{% block page_content %}
+<div class="tc-app">
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="tc-navbar">
+    <div class="tc-navbar__brand">
+      <div class="tc-brand-icon"><i class="fa-solid fa-phone-volume"></i></div>
+      <span class="tc-brand-name">LeadCall CRM</span>
+    </div>
+
+    <nav class="tc-navbar__tabs">
+      <a href="/telecaller-performance" class="tc-tab tc-tab--active">
+        <i class="fa-solid fa-chart-simple"></i> Performance
+      </a>
+      <a href="#" class="tc-tab">
+        <i class="fa-solid fa-bolt"></i> Today's Actions
+      </a>
+      <a href="#" class="tc-tab">
+        <i class="fa-solid fa-user-plus"></i> Fresh Leads
+      </a>
+      <a href="/telecaller-home" class="tc-tab">
+        <i class="fa-solid fa-rotate"></i> Follow-ups
+      </a>
+    </nav>
+
+    <div class="tc-navbar__right">
+      <button class="tc-notif-btn" id="notifBtn">
+        <i class="fa-solid fa-bell"></i>
+        <span class="tc-badge">3</span>
+      </button>
+      <div class="tc-user-pill">
+        <div class="tc-user-avatar" style="background-color: #2563eb;">RS</div>
+        <div class="tc-user-info">
+          <span class="tc-user-name">Rahul Sharma</span>
+          <span class="tc-user-role">Telecaller</span>
+        </div>
+      </div>
+      <button class="tc-logout" onclick="handleLogout()" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="tc-main">
+
+    <!-- Hero Welcome -->
+    <div class="tc-performance-hero">
+      <h1 class="tc-welcome-title">Good evening, Rahul! 👋</h1>
+      <p class="tc-welcome-subtitle">Here's your performance overview for this month</p>
+    </div>
+
+    <!-- Filters Row -->
+    <div class="tc-filters">
+      <div class="tc-filter-group">
+        <label>DATE</label>
+        <div class="tc-select-wrap">
+          <i class="fa-regular fa-calendar"></i>
+          <select id="filterDate">
+            <option>This Month</option>
+            <option>Today</option>
+            <option>This Week</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group tc-filter-group--priority">
+        <label>PRIORITY</label>
+        <div class="tc-priority-pills">
+          <button class="tc-ppill tc-ppill--hot active">🔥 Hot</button>
+          <button class="tc-ppill tc-ppill--warm active">🟡 Warm</button>
+          <button class="tc-ppill tc-ppill--cold active">🔵 Cold</button>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SORT BY</label>
+        <div class="tc-select-wrap">
+          <i class="fa-solid fa-arrow-up-wide-short"></i>
+          <select id="filterSort">
+            <option>All Cases</option>
+            <option>Calls Made</option>
+            <option>Conversions</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>ORDER BY</label>
+        <div class="tc-select-wrap">
+          <select id="filterOrder">
+            <option>Calls Made</option>
+            <option>Callback Time</option>
+            <option>Lead ID</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Metrics Cards Row -->
+    <div class="tc-metrics-row">
+      
+      <!-- Card 1 -->
+      <div class="tc-metric-card">
+        <div class="tc-metric-header">
+          <span class="tc-metric-label">MTD Calls Made</span>
+          <i class="fa-solid fa-phone tc-metric-icon"></i>
+        </div>
+        <div class="tc-metric-value">156</div>
+        <div class="tc-metric-trend tc-trend-up">
+          <i class="fa-solid fa-arrow-trend-up"></i> +16.42% <span class="tc-trend-label">MOM</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tc-metric-card">
+        <div class="tc-metric-header">
+          <span class="tc-metric-label">Follow-ups Done</span>
+          <i class="fa-solid fa-user-check tc-metric-icon"></i>
+        </div>
+        <div class="tc-metric-value">42</div>
+        <div class="tc-metric-trend tc-trend-up">
+          <i class="fa-solid fa-arrow-trend-up"></i> +10.53% <span class="tc-trend-label">MOM</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tc-metric-card highlighted-orange">
+        <div class="tc-metric-header">
+          <span class="tc-metric-label">Hot Leads Passed</span>
+          <i class="fa-solid fa-fire tc-metric-icon"></i>
+        </div>
+        <div class="tc-metric-value">18</div>
+        <div class="tc-metric-trend tc-trend-up">
+          <i class="fa-solid fa-arrow-trend-up"></i> +28.57% <span class="tc-trend-label">MOM</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="tc-metric-card">
+        <div class="tc-metric-header">
+          <span class="tc-metric-label">Visits Booked</span>
+          <i class="fa-solid fa-calendar-check tc-metric-icon"></i>
+        </div>
+        <div class="tc-metric-value">12</div>
+        <div class="tc-metric-trend tc-trend-up">
+          <i class="fa-solid fa-arrow-trend-up"></i> +33.33% <span class="tc-trend-label">MOM</span>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="tc-metric-card">
+        <div class="tc-metric-header">
+          <span class="tc-metric-label">Conversions</span>
+          <i class="fa-solid fa-chart-line tc-metric-icon"></i>
+        </div>
+        <div class="tc-metric-value">₹245K</div>
+        <div class="tc-metric-trend tc-trend-up">
+          <i class="fa-solid fa-arrow-trend-up"></i> +40% <span class="tc-trend-label">MOM</span>
+          <span class="tc-metric-sublabel">7 deals</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Charts Row -->
+    <div class="tc-charts-grid">
+      
+      <!-- Target Card -->
+      <div class="tc-chart-card">
+        <div class="tc-chart-header">
+          <div class="tc-chart-title">
+            <i class="fa-solid fa-bullseye tc-target-icon"></i>
+            <h3>Monthly Call Target</h3>
+          </div>
+          <span class="tc-target-ratio">156 / 200</span>
+        </div>
+        <div class="tc-target-progress-container">
+          <div class="tc-progress-bar">
+            <div class="tc-progress-fill" style="width: 78%;"></div>
+          </div>
+          <div class="tc-progress-meta">
+            <span class="tc-achieved-percentage">78% Achieved</span>
+            <span class="tc-projected-percentage">Projected: 100%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bar Chart Card -->
+      <div class="tc-chart-card">
+        <div class="tc-chart-header">
+          <div class="tc-chart-title">
+            <h3>Month-over-Month Comparison</h3>
+          </div>
+        </div>
+        
+        <!-- Custom CSS Bar Chart -->
+        <div class="tc-comparison-chart">
+          
+          <div class="tc-chart-bars-container">
+            <!-- Metric 1: Calls -->
+            <div class="tc-chart-column">
+              <div class="tc-bars-pair">
+                <div class="tc-bar tc-bar--current" style="height: 156px;" title="This Month: 156"></div>
+                <div class="tc-bar tc-bar--last" style="height: 134px;" title="Last Month: 134"></div>
+              </div>
+              <span class="tc-column-label">Calls</span>
+            </div>
+
+            <!-- Metric 2: Hot Leads -->
+            <div class="tc-chart-column">
+              <div class="tc-bars-pair">
+                <div class="tc-bar tc-bar--current" style="height: 60px;" title="This Month: 18"></div>
+                <div class="tc-bar tc-bar--last" style="height: 48px;" title="Last Month: 14"></div>
+              </div>
+              <span class="tc-column-label">Hot Leads</span>
+            </div>
+
+            <!-- Metric 3: Visits -->
+            <div class="tc-chart-column">
+              <div class="tc-bars-pair">
+                <div class="tc-bar tc-bar--current" style="height: 40px;" title="This Month: 12"></div>
+                <div class="tc-bar tc-bar--last" style="height: 30px;" title="Last Month: 9"></div>
+              </div>
+              <span class="tc-column-label">Visits</span>
+            </div>
+
+            <!-- Metric 4: Conversions -->
+            <div class="tc-chart-column">
+              <div class="tc-bars-pair">
+                <div class="tc-bar tc-bar--current" style="height: 25px;" title="This Month: 7"></div>
+                <div class="tc-bar tc-bar--last" style="height: 18px;" title="Last Month: 5"></div>
+              </div>
+              <span class="tc-column-label">Conversions</span>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="tc-chart-legend">
+            <div class="tc-legend-item">
+              <span class="tc-legend-color tc-legend-color--current"></span>
+              <span>This Month</span>
+            </div>
+            <div class="tc-legend-item">
+              <span class="tc-legend-color tc-legend-color--last"></span>
+              <span>Last Month</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+  function handleLogout() {
+    fetch('/api/method/logout', { method: 'POST' })
+      .then(function() { window.location.href = '/login'; })
+      .catch(function() { window.location.href = '/login'; });
+  }
+</script>
+{% endblock %}

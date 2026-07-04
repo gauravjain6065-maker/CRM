@@ -1,0 +1,304 @@
+/* ==========================================================================
+   LEADCALL CRM - TELECALLER PERFORMANCE DASHBOARD (telecaller-performance.css)
+   ========================================================================== */
+
+/* Hero Section */
+.tc-performance-hero {
+  margin-bottom: 28px;
+}
+
+.tc-welcome-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px 0;
+  letter-spacing: -0.5px;
+}
+
+.tc-welcome-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Metrics Row */
+.tc-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1024px) {
+  .tc-metrics-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tc-metrics-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .tc-metrics-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-metric-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  min-height: 125px;
+}
+
+.tc-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tc-metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.tc-metric-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.tc-metric-icon {
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.tc-metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.tc-metric-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.tc-trend-up {
+  color: #16a34a; /* Green success trend color */
+}
+
+.tc-trend-label {
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-left: 2px;
+}
+
+.tc-metric-sublabel {
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+/* Highlighted Orange Card */
+.tc-metric-card.highlighted-orange {
+  background-color: #fffbeb;
+  border-color: #fef3c7;
+}
+
+.tc-metric-card.highlighted-orange .tc-metric-icon {
+  color: #d97706;
+}
+
+/* Charts Grid */
+.tc-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .tc-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tc-chart-card {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+
+.tc-chart-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tc-chart-title h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.tc-target-icon {
+  color: #2563eb;
+  font-size: 16px;
+}
+
+.tc-target-ratio {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Target Tracker Content */
+.tc-target-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.tc-progress-bar {
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  height: 16px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tc-progress-fill {
+  background-color: #2563eb;
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tc-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tc-achieved-percentage {
+  color: #2563eb;
+}
+
+.tc-projected-percentage {
+  color: var(--text-muted);
+}
+
+/* Custom Month-over-Month Bar Chart */
+.tc-comparison-chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.tc-chart-bars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 200px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+
+.tc-chart-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+}
+
+.tc-bars-pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 170px;
+}
+
+.tc-bar {
+  width: 14px;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.5s ease;
+}
+
+.tc-bar--current {
+  background-color: #2563eb; /* Blue */
+}
+
+.tc-bar--last {
+  background-color: #e2e8f0; /* Grey */
+}
+
+.tc-column-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: center;
+}
+
+.tc-chart-legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.tc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.tc-legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.tc-legend-color--current {
+  background-color: #2563eb;
+}
+
+.tc-legend-color--last {
+  background-color: #e2e8f0;
+}
