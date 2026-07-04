@@ -1,14 +1,25 @@
-{% set show_custom_sidebar = False %}
-{% extends "templates/ai_crm_base.html" %}
 
-{% block page_title %}Follow-up Calls – LeadCall CRM{% endblock %}
-{% block body_class %}tc-dashboard{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Follow-up Calls – LeadCall CRM</title>
 
-{% block page_css %}
-<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css?v=1.2">
-{% endblock %}
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-{% block page_content %}
+  <!-- Common CSS (always loaded) -->
+  <link rel="stylesheet" href="/assets/ai_crm/css/variables.css">
+  <link rel="stylesheet" href="/assets/ai_crm/css/common.css">
+  <link rel="stylesheet" href="/assets/ai_crm/css/layout.css">
+
+  <!-- Page-specific CSS -->
+  
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css">
+
+</head>
+<body class="tc-dashboard">
 <div class="tc-app">
 
   <!-- ===== TOP NAVBAR ===== -->
@@ -200,8 +211,13 @@
 
   </main>
 </div>
-{% endblock %}
+<!-- Common JS (always loaded) -->
+  <script src="/assets/ai_crm/js/common.js"></script>
 
-{% block page_js %}
+  <!-- Page-specific JS -->
+  
 <script src="/assets/ai_crm/js/telecaller-home.js"></script>
-{% endblock %}
+
+
+</body>
+</html>
