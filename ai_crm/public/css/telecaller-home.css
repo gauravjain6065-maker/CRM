@@ -283,32 +283,35 @@ body.tc-dashboard {
   background-color: #ef4444;
 }
 
-/* Advanced Filters Grid */
+
+
+/* ===== ADVANCED FILTERS ROW ===== */
 .tc-filters {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 20px;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 24px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   margin-bottom: 24px;
-}
-
-.tc-filters .tc-filter-group--search {
-  grid-column: span 2;
-}
-
-@media (max-width: 900px) {
-  .tc-filters .tc-filter-group--search {
-    grid-column: span 1;
-  }
 }
 
 .tc-filter-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex: 1 1 140px; /* grow and shrink, minimum width 140px */
+}
+
+.tc-filter-group--priority {
+  flex: 0 0 auto; /* don't shrink priority, keep it at natural width */
+  min-width: 210px;
+}
+
+.tc-filter-group--search {
+  flex: 2 1 240px; /* give search more room */
 }
 
 .tc-filter-group label {
@@ -316,6 +319,7 @@ body.tc-dashboard {
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .tc-select-wrap {
@@ -329,6 +333,7 @@ body.tc-dashboard {
   left: 12px;
   color: var(--text-muted);
   font-size: 13px;
+  pointer-events: none;
 }
 
 .tc-select-wrap select,
@@ -350,8 +355,10 @@ body.tc-dashboard {
 .tc-select-wrap select {
   appearance: none;
   cursor: pointer;
+  padding-right: 28px; /* space for arrow */
 }
 
+/* Custom select arrow icon if needed or use native styled */
 .tc-select-wrap select:focus,
 .tc-select-wrap input:focus {
   border-color: var(--primary-color);
@@ -359,14 +366,14 @@ body.tc-dashboard {
 
 .tc-priority-pills {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .tc-ppill {
   border: 1px solid var(--border-color);
   background-color: #ffffff;
-  border-radius: 15px;
-  padding: 6px 12px;
+  border-radius: 20px;
+  padding: 6px 10px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
