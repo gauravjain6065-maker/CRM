@@ -5,6 +5,7 @@ PROTECTED_ROUTES = [
     "/area-management",
     "/caller-replacement",
     "/crm-dashboard",
+    "/disposition-codes",
     "/lead-import",
     "/lead-management",
     "/lead-source",

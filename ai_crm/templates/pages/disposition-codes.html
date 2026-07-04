@@ -1,0 +1,119 @@
+{% set show_custom_sidebar = True %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Disposition Codes – Saarva Admin{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/disposition-codes.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="main-content">
+
+  <div class="topbar">
+    <h2></h2>
+  </div>
+
+  <div class="page">
+
+    <div class="top-header">
+      <div>
+        <h1>Disposition Codes</h1>
+        <p>Manage lead disposition codes and routing behavior.</p>
+      </div>
+      <button class="add-btn" id="addDispositionBtn">
+        <i class="fa-solid fa-plus"></i> Add Disposition
+      </button>
+    </div>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Description</th>
+            <th>Priority</th>
+            <th>Auto Routing</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><strong>Interested</strong></td>
+            <td>Customer is interested in property</td>
+            <td><span class="badge hot">HOT</span></td>
+            <td><span class="status">Yes</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Follow Up</strong></td>
+            <td>Schedule future follow-up</td>
+            <td><span class="badge warm">WARM</span></td>
+            <td><span class="status">Yes</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Not Interested</strong></td>
+            <td>Customer is not interested</td>
+            <td><span class="badge cold">COLD</span></td>
+            <td><span class="status no">No</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Site Visit</strong></td>
+            <td>Property visit scheduled</td>
+            <td><span class="badge hot">HOT</span></td>
+            <td><span class="status">Yes</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Callback Later</strong></td>
+            <td>Customer requested callback later</td>
+            <td><span class="badge warm">WARM</span></td>
+            <td><span class="status">Yes</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>Booked</strong></td>
+            <td>Property booked successfully</td>
+            <td><span class="badge hot">HOT</span></td>
+            <td><span class="status">Yes</span></td>
+            <td>
+              <button class="icon-btn edit"><i class="fa-solid fa-pen"></i></button>
+              <button class="icon-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div><!-- .page close -->
+
+</div><!-- .main-content close -->
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/disposition-codes.js"></script>
+{% endblock %}
