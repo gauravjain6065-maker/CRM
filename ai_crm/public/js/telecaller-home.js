@@ -175,8 +175,8 @@ function renderLeads() {
 
 // Function to handle clicking on Call button
 window.initiateCall = function (id, name) {
-  // Standard alert simulator
-  alert("Initiating call to " + name + " (" + id + ")...");
+  // Redirect to dialer screen
+  window.location.href = "/telecaller-call?lead=" + id;
 };
 
 // Handle logout

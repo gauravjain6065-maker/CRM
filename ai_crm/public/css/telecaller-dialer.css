@@ -1,0 +1,520 @@
+/* ==========================================================================
+   LEADCALL CRM - ACTIVE DIALER LAYOUT (telecaller-dialer.css)
+   ========================================================================== */
+
+:root {
+  --dialer-bg: #f8fafc;
+  --panel-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --text-dark: #0f172a;
+  --text-muted: #64748b;
+  --primary-blue: #2563eb;
+  --hot-red: #ef4444;
+  --warm-orange: #f97316;
+  --green-whatsapp: #22c55e;
+}
+
+body.tc-dashboard {
+  background-color: var(--dialer-bg);
+}
+
+/* ===== DIALER HEADER BAR ===== */
+.tc-dialer-status-bar {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tc-dialer-status-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.tc-dialer-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.tc-dialer-badge--red {
+  background-color: #fef2f2;
+  color: var(--hot-red);
+  border: 1px solid #fee2e2;
+}
+
+.tc-dialer-meta-item {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tc-dialer-meta-item i {
+  font-size: 14px;
+}
+
+.tc-dialer-status-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+
+.tc-dialer-timer-icon {
+  color: var(--primary-blue);
+  font-size: 13px;
+  animation: dialerPulse 1.5s infinite;
+}
+
+.tc-dialer-header-timer {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  font-family: monospace;
+}
+
+@keyframes dialerPulse {
+  0%   { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0.5; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ===== MAIN DIALER LAYOUT ===== */
+.tc-dialer-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 24px;
+  padding: 32px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .tc-dialer-content {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+  }
+}
+
+.tc-dialer-left-col,
+.tc-dialer-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== SECTION CARD ===== */
+.tc-dialer-section {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+}
+
+.tc-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.tc-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-dark);
+}
+
+.tc-section-title i {
+  color: var(--primary-blue);
+  font-size: 16px;
+}
+
+.tc-section-title h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Lead Info block */
+.tc-dialer-lead-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 16px 0;
+}
+
+.tc-lead-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.tc-info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.tc-info-item i {
+  color: var(--text-muted);
+  width: 16px;
+  text-align: center;
+}
+
+.tc-whatsapp-report-btn {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid var(--green-whatsapp);
+  color: var(--green-whatsapp);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.tc-whatsapp-report-btn:hover {
+  background-color: #f0fdf4;
+}
+
+/* Pricing Calculator block */
+.tc-calculator-tag {
+  background-color: #f1f5f9;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.tc-calculator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tc-calc-input-wrap {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.tc-calc-input-wrap select {
+  flex-grow: 1;
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-dark);
+  font-weight: 500;
+  outline: none;
+  height: 38px;
+  cursor: pointer;
+}
+
+.tc-calc-add-btn {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.tc-calc-add-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.tc-discount-box {
+  background-color: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.tc-discount-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tc-discount-info i {
+  color: var(--warm-orange);
+  font-size: 20px;
+}
+
+.tc-discount-info h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.tc-discount-info p {
+  font-size: 12px;
+  color: var(--warm-orange);
+  margin: 0;
+  font-weight: 600;
+}
+
+.tc-discount-apply-btn {
+  background-color: #ffffff;
+  border: 1px solid var(--warm-orange);
+  color: var(--warm-orange);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tc-discount-apply-btn:hover {
+  background-color: var(--warm-orange);
+  color: #ffffff;
+}
+
+/* Call Disposition block */
+.tc-disposition-active-badge {
+  background-color: #fee2e2;
+  color: var(--hot-red);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.tc-disposition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tc-disp-btn {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  color: var(--text-dark);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+.tc-disp-btn i {
+  color: var(--text-muted);
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.tc-disp-btn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.tc-disp-btn.active {
+  border-color: var(--hot-red) !important;
+  color: var(--hot-red) !important;
+  background-color: #fef2f2 !important;
+}
+
+.tc-disp-btn.active i {
+  color: var(--hot-red) !important;
+}
+
+/* ===== DIAL STATUS RIGHT PANEL CARD ===== */
+.tc-calling-card-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+}
+
+.tc-calling-avatar-wrapper {
+  margin-bottom: 18px;
+}
+
+.tc-calling-avatar {
+  background-color: #dcfce7;
+  color: var(--green-whatsapp);
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 0 0 8px #f0fdf4;
+}
+
+.tc-calling-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+}
+
+.tc-calling-phone {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 18px 0;
+  font-weight: 500;
+}
+
+.tc-calling-large-timer {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 24px;
+  font-family: monospace;
+}
+
+.tc-calling-actions-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.tc-round-btn {
+  background-color: #f5f5f4;
+  border: none;
+  color: #57534e;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.tc-round-btn:hover {
+  background-color: #e7e5e4;
+}
+
+.tc-round-btn--hangup {
+  background-color: var(--hot-red) !important;
+  color: #ffffff !important;
+}
+
+.tc-round-btn--hangup:hover {
+  background-color: #dc2626 !important;
+}
+
+.tc-calling-instruction {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ===== ACCORDIONS FOR SCRIPTS ===== */
+.tc-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tc-accordion-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.tc-accordion-header {
+  background-color: #ffffff;
+  width: 100%;
+  border: none;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.tc-accordion-header span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.tc-accordion-header i {
+  color: var(--text-muted);
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.tc-accordion-body {
+  background-color: #fefbeb; /* Light yellow background for active script */
+  border-top: 1px solid var(--border-color);
+  padding: 14px 18px;
+  display: none;
+}
+
+.tc-accordion-body p {
+  font-size: 12px;
+  color: #78350f; /* Brownish text for scripts */
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tc-accordion-body strong.script-replace-name {
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* Active script styling */
+.tc-accordion-item.active {
+  border-color: #fde047;
+}
+
+.tc-accordion-item.active .tc-accordion-body {
+  display: block;
+}

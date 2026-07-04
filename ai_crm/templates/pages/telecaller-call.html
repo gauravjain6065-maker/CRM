@@ -1,0 +1,301 @@
+{% set show_custom_sidebar = False %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Active Call – LeadCall CRM{% endblock %}
+{% block body_class %}tc-dashboard{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css?v=1.3">
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-dialer.css?v=1.0">
+{% endblock %}
+
+{% block page_content %}
+<div class="tc-app">
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="tc-navbar">
+    <div class="tc-navbar__brand">
+      <div class="tc-brand-icon"><i class="fa-solid fa-phone-volume"></i></div>
+      <span class="tc-brand-name">LeadCall CRM</span>
+    </div>
+
+    <nav class="tc-navbar__tabs">
+      <a href="/telecaller-performance" class="tc-tab">
+        <i class="fa-solid fa-chart-simple"></i> Performance
+      </a>
+      <a href="/telecaller-actions" class="tc-tab">
+        <i class="fa-solid fa-bolt"></i> Today's Actions
+      </a>
+      <a href="/telecaller-fresh" class="tc-tab">
+        <i class="fa-solid fa-user-plus"></i> Fresh Leads
+      </a>
+      <a href="/telecaller-home" class="tc-tab">
+        <i class="fa-solid fa-rotate"></i> Follow-ups
+      </a>
+    </nav>
+
+    <div class="tc-navbar__right">
+      <button class="tc-notif-btn">
+        <i class="fa-solid fa-bell"></i>
+        <span class="tc-badge">3</span>
+      </button>
+      <div class="tc-user-pill">
+        <div class="tc-user-avatar" style="background-color: #2563eb;">RS</div>
+        <div class="tc-user-info">
+          <span class="tc-user-name">Rahul Sharma</span>
+          <span class="tc-user-role">Telecaller</span>
+        </div>
+      </div>
+      <button class="tc-logout" onclick="handleLogout()" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== DIALER HEADER BAR ===== -->
+  <div class="tc-dialer-status-bar">
+    <div class="tc-dialer-status-left">
+      <span class="tc-dialer-badge tc-dialer-badge--red">HOT LEAD</span>
+      <span class="tc-dialer-meta-item"><i class="fa-regular fa-clock"></i> Lead Age: <strong id="leadAge">about 20 hours</strong></span>
+      <span class="tc-dialer-meta-item"><i class="fa-solid fa-history"></i> Previous Calls: <strong>1</strong></span>
+    </div>
+    <div class="tc-dialer-status-right">
+      <span class="tc-dialer-timer-icon"><i class="fa-solid fa-phone"></i></span>
+      <span class="tc-dialer-header-timer" id="headerTimer">00:06</span>
+    </div>
+  </div>
+
+  <!-- ===== MAIN TWO-COLUMN CONTENT ===== -->
+  <main class="tc-dialer-content">
+    
+    <!-- LEFT COLUMN -->
+    <div class="tc-dialer-left-col">
+      
+      <!-- Lead Info Block -->
+      <section class="tc-dialer-section">
+        <h2 class="tc-dialer-lead-name" id="leadName">Sneha Desai</h2>
+        
+        <div class="tc-lead-info-grid">
+          <div class="tc-info-item">
+            <i class="fa-solid fa-phone"></i>
+            <span id="leadPhone">+91 96986 33579</span>
+          </div>
+          <div class="tc-info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span id="leadArea">Goregaon</span>
+          </div>
+          <div class="tc-info-item">
+            <i class="fa-brands fa-square-facebook"></i>
+            <span id="leadSource">Facebook</span>
+          </div>
+          <div class="tc-info-item">
+            <i class="fa-solid fa-file-invoice"></i>
+            <span id="leadService">Home Buying</span>
+          </div>
+        </div>
+
+        <button class="tc-whatsapp-report-btn" onclick="sendReport()">
+          <i class="fa-regular fa-comment-dots"></i> Send Sample Report via WhatsApp
+        </button>
+      </section>
+
+      <!-- Pricing Calculator Block -->
+      <section class="tc-dialer-section">
+        <div class="tc-section-header">
+          <div class="tc-section-title">
+            <i class="fa-solid fa-calculator"></i>
+            <h3>Pricing Calculator</h3>
+          </div>
+          <span class="tc-calculator-tag" id="calcServiceTag">Home Buying</span>
+        </div>
+
+        <form class="tc-calculator-form">
+          <div class="tc-form-row">
+            <label>Property Type</label>
+            <div class="tc-calc-input-wrap">
+              <select>
+                <option>Select property type</option>
+                <option>Apartment</option>
+                <option>Villa</option>
+                <option>Independent House</option>
+              </select>
+              <button type="button" class="tc-calc-add-btn">+</button>
+            </div>
+          </div>
+
+          <div class="tc-form-row">
+            <label>Area Measurement</label>
+            <div class="tc-calc-input-wrap">
+              <select>
+                <option>Carpet Area</option>
+                <option>Super Built-up Area</option>
+                <option>Plot Area</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="tc-form-row">
+            <label>Area Range (sq ft)</label>
+            <div class="tc-calc-input-wrap">
+              <select>
+                <option>Select area range</option>
+                <option>500 - 1000 sq ft</option>
+                <option>1000 - 1500 sq ft</option>
+                <option>1500+ sq ft</option>
+              </select>
+              <button type="button" class="tc-calc-add-btn">+</button>
+            </div>
+          </div>
+
+          <!-- Early Bird Discount -->
+          <div class="tc-discount-box">
+            <div class="tc-discount-info">
+              <i class="fa-solid fa-tag"></i>
+              <div>
+                <h4>Early Bird Discount</h4>
+                <p>10% OFF</p>
+              </div>
+            </div>
+            <button type="button" class="tc-discount-apply-btn">Apply</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Call Disposition Block -->
+      <section class="tc-dialer-section">
+        <div class="tc-section-header">
+          <div class="tc-section-title">
+            <i class="fa-regular fa-square-check"></i>
+            <h3>Call Disposition</h3>
+          </div>
+          <span class="tc-disposition-active-badge" id="activeDispBadge">Wrong Number</span>
+        </div>
+
+        <div class="tc-disposition-grid">
+          <button class="tc-disp-btn" onclick="selectDisposition(this, 'Interested to Pay')">
+            <i class="fa-solid fa-indian-rupee-sign"></i> Interested to Pay
+          </button>
+          <button class="tc-disp-btn" onclick="selectDisposition(this, 'Callback Scheduled')">
+            <i class="fa-regular fa-calendar-check"></i> Callback Scheduled
+          </button>
+          <button class="tc-disp-btn" onclick="selectDisposition(this, 'Visit Scheduled')">
+            <i class="fa-regular fa-calendar-days"></i> Visit Scheduled
+          </button>
+          <button class="tc-disp-btn" onclick="selectDisposition(this, 'Not Interested')">
+            <i class="fa-regular fa-circle-xmark"></i> Not Interested
+          </button>
+          <button class="tc-disp-btn" onclick="selectDisposition(this, 'Not Reachable')">
+            <i class="fa-solid fa-phone-slash"></i> Not Reachable
+          </button>
+          <button class="tc-disp-btn active" onclick="selectDisposition(this, 'Wrong Number')">
+            <i class="fa-solid fa-user-slash"></i> Wrong Number
+          </button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="tc-dialer-right-col">
+      
+      <!-- Call Dialing Panel -->
+      <section class="tc-dialer-section tc-calling-card-section">
+        
+        <div class="tc-calling-avatar-wrapper">
+          <div class="tc-calling-avatar">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+        </div>
+
+        <h3 class="tc-calling-name" id="dialName">Sneha Desai</h3>
+        <p class="tc-calling-phone" id="dialPhone">+91 96986 33579</p>
+        
+        <div class="tc-calling-large-timer" id="dialLargeTimer">00:06</div>
+
+        <!-- Phone Action Buttons Row -->
+        <div class="tc-calling-actions-row">
+          <button class="tc-round-btn"><i class="fa-solid fa-microphone"></i></button>
+          <button class="tc-round-btn tc-round-btn--hangup" onclick="endCall()"><i class="fa-solid fa-phone-slash"></i></button>
+          <button class="tc-round-btn"><i class="fa-solid fa-volume-high"></i></button>
+        </div>
+
+        <p class="tc-calling-instruction">Select disposition below before ending call</p>
+      </section>
+
+      <!-- Call Scripts Block -->
+      <section class="tc-dialer-section">
+        <div class="tc-section-header">
+          <div class="tc-section-title">
+            <i class="fa-solid fa-scroll"></i>
+            <h3>Call Scripts</h3>
+          </div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="tc-accordion-list">
+          
+          <div class="tc-accordion-item">
+            <button class="tc-accordion-header" onclick="toggleAccordion(this)">
+              <span>Opening Script</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="tc-accordion-body">
+              <p>Hello, am I speaking with <strong class="script-replace-name">[Name]</strong>? This is <strong>[Your Name]</strong> from HomeInspect Pro. I noticed you recently showed interest in our home inspection services. Is this a good time to talk?</p>
+            </div>
+          </div>
+
+          <div class="tc-accordion-item active">
+            <button class="tc-accordion-header" onclick="toggleAccordion(this)">
+              <span>PDI Benefits</span>
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+            <div class="tc-accordion-body">
+              <p>Our Pre-Delivery Inspection helps you identify defects before taking possession. We check over 400 points including electrical, plumbing, structural integrity, and finishing quality.</p>
+            </div>
+          </div>
+
+          <div class="tc-accordion-item">
+            <button class="tc-accordion-header" onclick="toggleAccordion(this)">
+              <span>Pricing Script</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="tc-accordion-body">
+              <p>We offer customized packages based on your property layout and carpet area. Let me compute the estimate using our calculator on the left side.</p>
+            </div>
+          </div>
+
+          <div class="tc-accordion-item">
+            <button class="tc-accordion-header" onclick="toggleAccordion(this)">
+              <span>Objection: Too Expensive</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="tc-accordion-body">
+              <p>I understand, but a Pre-Delivery Inspection helps you save lakhs of rupees on post-possession repairs. Real estate builders are obligated to fix any defects pointed out in our report before possession.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Quick FAQs Block -->
+      <section class="tc-dialer-section">
+        <div class="tc-accordion-item">
+          <button class="tc-accordion-header" onclick="toggleAccordion(this)">
+            <span style="font-weight:700;"><i class="fa-regular fa-circle-question" style="margin-right:8px;color:#2563eb;"></i> Quick FAQs</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="tc-accordion-body">
+            <p><strong>Q: What is covered in home inspection?</strong><br>A: We cover dampness testing, electrical safety, plumbing leaks, tile tap checks, doors/windows checks, and walls alignment using advanced thermal devices.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="/assets/ai_crm/js/telecaller-dialer.js"></script>
+{% endblock %}

@@ -273,7 +273,7 @@
 {% block page_js %}
 <script>
   function initiateCall(id, name) {
-    alert("Calling " + name + " (" + id + ")...");
+    window.location.href = "/telecaller-call?lead=" + id;
   }
   function sendReport(id, name) {
     alert("Sending PDF report to " + name + " (" + id + ") via WhatsApp...");
