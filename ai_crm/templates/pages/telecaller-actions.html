@@ -1,0 +1,233 @@
+{% set show_custom_sidebar = False %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Today's Actions – LeadCall CRM{% endblock %}
+{% block body_class %}tc-dashboard{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css?v=1.3">
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-performance.css?v=1.0">
+{% endblock %}
+
+{% block page_content %}
+<div class="tc-app">
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="tc-navbar">
+    <div class="tc-navbar__brand">
+      <div class="tc-brand-icon"><i class="fa-solid fa-phone-volume"></i></div>
+      <span class="tc-brand-name">LeadCall CRM</span>
+    </div>
+
+    <nav class="tc-navbar__tabs">
+      <a href="/telecaller-performance" class="tc-tab">
+        <i class="fa-solid fa-chart-simple"></i> Performance
+      </a>
+      <a href="/telecaller-actions" class="tc-tab tc-tab--active">
+        <i class="fa-solid fa-bolt"></i> Today's Actions
+      </a>
+      <a href="/telecaller-fresh" class="tc-tab">
+        <i class="fa-solid fa-user-plus"></i> Fresh Leads
+      </a>
+      <a href="/telecaller-home" class="tc-tab">
+        <i class="fa-solid fa-rotate"></i> Follow-ups
+      </a>
+    </nav>
+
+    <div class="tc-navbar__right">
+      <button class="tc-notif-btn" id="notifBtn">
+        <i class="fa-solid fa-bell"></i>
+        <span class="tc-badge">3</span>
+      </button>
+      <div class="tc-user-pill">
+        <div class="tc-user-avatar" style="background-color: #2563eb;">RS</div>
+        <div class="tc-user-info">
+          <span class="tc-user-name">Rahul Sharma</span>
+          <span class="tc-user-role">Telecaller</span>
+        </div>
+      </div>
+      <button class="tc-logout" onclick="handleLogout()" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="tc-main">
+
+    <!-- Page Title -->
+    <div class="tc-page-header" style="margin-bottom: 24px;">
+      <div class="tc-page-title" style="margin-bottom: 0;">
+        <div style="margin-left: 0;">
+          <h1 style="font-size: 26px; font-weight: 700; margin-bottom: 4px;">Today's Actions</h1>
+          <p style="color: var(--text-muted); font-size: 14px;">Prioritize your calls and maximize conversions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters Row -->
+    <div class="tc-filters">
+      <div class="tc-filter-group">
+        <label>DATE</label>
+        <div class="tc-select-wrap">
+          <i class="fa-regular fa-calendar"></i>
+          <select id="filterDate">
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group tc-filter-group--priority">
+        <label>PRIORITY</label>
+        <div class="tc-priority-pills">
+          <button class="tc-ppill tc-ppill--hot active">🔥 Hot</button>
+          <button class="tc-ppill tc-ppill--warm active">🟡 Warm</button>
+          <button class="tc-ppill tc-ppill--cold active">🔵 Cold</button>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SORT BY</label>
+        <div class="tc-select-wrap">
+          <i class="fa-solid fa-arrow-up-wide-short"></i>
+          <select id="filterSort">
+            <option>All Cases</option>
+            <option>Callbacks First</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>ORDER BY</label>
+        <div class="tc-select-wrap">
+          <select id="filterOrder">
+            <option>Callback Time</option>
+            <option>Lead ID</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group tc-filter-group--search">
+        <label>SEARCH</label>
+        <div class="tc-select-wrap tc-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search Lead ID, Area, Name..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary Metrics Cards -->
+    <div class="tc-actions-summary-row">
+      
+      <!-- Card 1 -->
+      <div class="tc-action-summary-card">
+        <div class="tc-action-summary-icon-wrapper" style="background-color: #f8fafc; border: 1px solid #e2e8f0; color: #64748b;">
+          <i class="fa-regular fa-clock"></i>
+        </div>
+        <div class="tc-action-summary-info">
+          <div class="tc-action-summary-number">0</div>
+          <div class="tc-action-summary-label">Overdue Callbacks</div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tc-action-summary-card">
+        <div class="tc-action-summary-icon-wrapper" style="background-color: #f8fafc; border: 1px solid #e2e8f0; color: #64748b;">
+          <i class="fa-regular fa-calendar-check"></i>
+        </div>
+        <div class="tc-action-summary-info">
+          <div class="tc-action-summary-number">0</div>
+          <div class="tc-action-summary-label">Today's Callbacks</div>
+        </div>
+      </div>
+
+      <!-- Card 3 (Highlighted Blue) -->
+      <div class="tc-action-summary-card highlighted-blue-left">
+        <div class="tc-action-summary-icon-wrapper" style="background-color: #eff6ff; color: #2563eb;">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div class="tc-action-summary-info">
+          <div class="tc-action-summary-number">16</div>
+          <div class="tc-action-summary-label">Fresh Leads</div>
+          <div class="tc-action-summary-sublabel">Never contacted</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- What would you like to do? Section -->
+    <div class="tc-what-next-section">
+      <h2 class="tc-section-subtitle">What would you like to do?</h2>
+      
+      <div class="tc-next-options-grid">
+        
+        <!-- Option 1 -->
+        <a href="/telecaller-home" class="tc-next-option-card">
+          <div class="tc-next-option-icon-box" style="background-color: #fff7ed; color: #f97316;">
+            <i class="fa-solid fa-rotate-right"></i>
+          </div>
+          <div class="tc-next-option-text">
+            <h3>Call Follow-ups First</h3>
+            <p>Handle callbacks and warm leads that are waiting for your response</p>
+          </div>
+          <div class="tc-next-option-badge">
+            <span class="tc-next-option-count" style="color: #f97316;">0</span>
+            <span class="tc-next-option-unit">leads</span>
+            <i class="fa-solid fa-chevron-right tc-next-arrow"></i>
+          </div>
+        </a>
+
+        <!-- Option 2 -->
+        <a href="/telecaller-fresh" class="tc-next-option-card">
+          <div class="tc-next-option-icon-box" style="background-color: #eff6ff; color: #2563eb;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div class="tc-next-option-text">
+            <h3>Call Fresh Leads</h3>
+            <p>Reach out to new leads that have never been contacted</p>
+          </div>
+          <div class="tc-next-option-badge">
+            <span class="tc-next-option-count" style="color: #2563eb;">16</span>
+            <span class="tc-next-option-unit">leads</span>
+            <i class="fa-solid fa-chevron-right tc-next-arrow"></i>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Bottom Stat Pill Blocks -->
+    <div class="tc-bottom-action-stats">
+      <div class="tc-bottom-stat-pill">
+        <span class="tc-stat-pill-num">16</span>
+        <span class="tc-stat-pill-label">Total Pending</span>
+      </div>
+      <div class="tc-bottom-stat-pill">
+        <span class="tc-stat-pill-num" style="color: #dc2626;">14</span>
+        <span class="tc-stat-pill-label">Hot Leads</span>
+      </div>
+      <div class="tc-bottom-stat-pill">
+        <span class="tc-stat-pill-num" style="color: #d97706;">14</span>
+        <span class="tc-stat-pill-label">Warm Leads</span>
+      </div>
+      <div class="tc-bottom-stat-pill">
+        <span class="tc-stat-pill-num" style="color: #2563eb;">22</span>
+        <span class="tc-stat-pill-label">Cold Leads</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+  function handleLogout() {
+    fetch('/api/method/logout', { method: 'POST' })
+      .then(function() { window.location.href = '/login'; })
+      .catch(function() { window.location.href = '/login'; });
+  }
+</script>
+{% endblock %}

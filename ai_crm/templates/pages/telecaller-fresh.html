@@ -1,0 +1,287 @@
+{% set show_custom_sidebar = False %}
+{% extends "templates/ai_crm_base.html" %}
+
+{% block page_title %}Fresh Leads – LeadCall CRM{% endblock %}
+{% block body_class %}tc-dashboard{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css?v=1.3">
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-performance.css?v=1.0">
+{% endblock %}
+
+{% block page_content %}
+<div class="tc-app">
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <header class="tc-navbar">
+    <div class="tc-navbar__brand">
+      <div class="tc-brand-icon"><i class="fa-solid fa-phone-volume"></i></div>
+      <span class="tc-brand-name">LeadCall CRM</span>
+    </div>
+
+    <nav class="tc-navbar__tabs">
+      <a href="/telecaller-performance" class="tc-tab">
+        <i class="fa-solid fa-chart-simple"></i> Performance
+      </a>
+      <a href="/telecaller-actions" class="tc-tab">
+        <i class="fa-solid fa-bolt"></i> Today's Actions
+      </a>
+      <a href="/telecaller-fresh" class="tc-tab tc-tab--active">
+        <i class="fa-solid fa-user-plus"></i> Fresh Leads
+      </a>
+      <a href="/telecaller-home" class="tc-tab">
+        <i class="fa-solid fa-rotate"></i> Follow-ups
+      </a>
+    </nav>
+
+    <div class="tc-navbar__right">
+      <button class="tc-notif-btn" id="notifBtn">
+        <i class="fa-solid fa-bell"></i>
+        <span class="tc-badge">3</span>
+      </button>
+      <div class="tc-user-pill">
+        <div class="tc-user-avatar" style="background-color: #2563eb;">RS</div>
+        <div class="tc-user-info">
+          <span class="tc-user-name">Rahul Sharma</span>
+          <span class="tc-user-role">Telecaller</span>
+        </div>
+      </div>
+      <button class="tc-logout" onclick="handleLogout()" title="Logout">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="tc-main">
+
+    <!-- Page Title -->
+    <div class="tc-page-header">
+      <div class="tc-page-title">
+        <div class="tc-spin-icon" style="background-color: #eff6ff; color: #2563eb;">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <div>
+          <h1>Fresh Leads</h1>
+          <p>16 leads that have never been contacted</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters Row -->
+    <div class="tc-filters">
+      <div class="tc-filter-group">
+        <label>DATE</label>
+        <div class="tc-select-wrap">
+          <i class="fa-regular fa-calendar"></i>
+          <select id="filterDate">
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>LEAD SOURCE</label>
+        <div class="tc-select-wrap">
+          <select id="filterSource">
+            <option>All Sources</option>
+            <option>Facebook</option>
+            <option>Website</option>
+            <option>JustDial</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SERVICE</label>
+        <div class="tc-select-wrap">
+          <select id="filterService">
+            <option>All Services</option>
+            <option>Home Buying</option>
+            <option>Seepage</option>
+            <option>Rental</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>SORT BY</label>
+        <div class="tc-select-wrap">
+          <i class="fa-solid fa-arrow-up-wide-short"></i>
+          <select id="filterSort">
+            <option>All Cases</option>
+            <option>Source</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group">
+        <label>ORDER BY</label>
+        <div class="tc-select-wrap">
+          <select id="filterOrder">
+            <option>Freshest First</option>
+            <option>Lead ID</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tc-filter-group tc-filter-group--search">
+        <label>SEARCH</label>
+        <div class="tc-select-wrap tc-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Search Lead ID, Area, Name..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Fresh Leads List -->
+    <div class="tc-leads" id="leadsList">
+
+      <!-- Card 1 -->
+      <div class="tc-lead-card">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0004</span>
+            <span class="tc-priority-badge tc-priority-badge--cold" style="background-color: #eff6ff; color: #2563eb; font-weight: 700;">NEW</span>
+            <span class="tc-service-tag">Home Buying</span>
+          </div>
+          <h2 class="tc-lead-name">Sneha Desai</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Goregaon</span>
+            <span><i class="fa-brands fa-square-facebook"></i> Facebook</span>
+            <span><i class="fa-regular fa-clock"></i> about 20 hours ago</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <button class="tc-send-report-btn" onclick="sendReport('LEAD-0004', 'Sneha Desai')">
+            <i class="fa-regular fa-comment-dots"></i> Send Report
+          </button>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0004', 'Sneha Desai')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tc-lead-card">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0037</span>
+            <span class="tc-priority-badge tc-priority-badge--cold" style="background-color: #eff6ff; color: #2563eb; font-weight: 700;">NEW</span>
+            <span class="tc-service-tag">Home Buying</span>
+          </div>
+          <h2 class="tc-lead-name">Lakshmi Rao</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Malad</span>
+            <span><i class="fa-brands fa-square-facebook"></i> Facebook</span>
+            <span><i class="fa-regular fa-clock"></i> 1 day ago</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <button class="tc-send-report-btn" onclick="sendReport('LEAD-0037', 'Lakshmi Rao')">
+            <i class="fa-regular fa-comment-dots"></i> Send Report
+          </button>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0037', 'Lakshmi Rao')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tc-lead-card">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0030</span>
+            <span class="tc-priority-badge tc-priority-badge--cold" style="background-color: #eff6ff; color: #2563eb; font-weight: 700;">NEW</span>
+            <span class="tc-service-tag">Home Buying</span>
+          </div>
+          <h2 class="tc-lead-name">Sneha Desai</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Thane</span>
+            <span><i class="fa-brands fa-square-facebook"></i> Facebook</span>
+            <span><i class="fa-regular fa-clock"></i> 2 days ago</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <button class="tc-send-report-btn" onclick="sendReport('LEAD-0030', 'Sneha Desai')">
+            <i class="fa-regular fa-comment-dots"></i> Send Report
+          </button>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0030', 'Sneha Desai')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="tc-lead-card">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0001</span>
+            <span class="tc-priority-badge tc-priority-badge--cold" style="background-color: #eff6ff; color: #2563eb; font-weight: 700;">NEW</span>
+            <span class="tc-service-tag">Seepage</span>
+          </div>
+          <h2 class="tc-lead-name">Meera Patel</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Malad</span>
+            <span><i class="fa-solid fa-globe"></i> Website</span>
+            <span><i class="fa-regular fa-clock"></i> 4 days ago</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <button class="tc-send-report-btn" onclick="sendReport('LEAD-0001', 'Meera Patel')">
+            <i class="fa-regular fa-comment-dots"></i> Send Report
+          </button>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0001', 'Meera Patel')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="tc-lead-card">
+        <div class="tc-lead-main">
+          <div class="tc-lead-meta">
+            <span class="tc-lead-id">LEAD-0027</span>
+            <span class="tc-priority-badge tc-priority-badge--cold" style="background-color: #eff6ff; color: #2563eb; font-weight: 700;">NEW</span>
+            <span class="tc-service-tag">Seepage</span>
+          </div>
+          <h2 class="tc-lead-name">Sanjay Gupta</h2>
+          <div class="tc-lead-details">
+            <span><i class="fa-solid fa-location-dot"></i> Malad</span>
+            <span><i class="fa-solid fa-headset"></i> JustDial</span>
+            <span><i class="fa-regular fa-clock"></i> 7 days ago</span>
+          </div>
+        </div>
+        <div class="tc-lead-action">
+          <button class="tc-send-report-btn" onclick="sendReport('LEAD-0027', 'Sanjay Gupta')">
+            <i class="fa-regular fa-comment-dots"></i> Send Report
+          </button>
+          <button class="tc-call-btn" onclick="initiateCall('LEAD-0027', 'Sanjay Gupta')">
+            <i class="fa-solid fa-phone"></i> Call
+          </button>
+        </div>
+      </div>
+
+    </div><!-- #leadsList -->
+
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+  function initiateCall(id, name) {
+    alert("Calling " + name + " (" + id + ")...");
+  }
+  function sendReport(id, name) {
+    alert("Sending PDF report to " + name + " (" + id + ") via WhatsApp...");
+  }
+  function handleLogout() {
+    fetch('/api/method/logout', { method: 'POST' })
+      .then(function() { window.location.href = '/login'; })
+      .catch(function() { window.location.href = '/login'; });
+  }
+</script>
+{% endblock %}

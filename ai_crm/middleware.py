@@ -11,6 +11,8 @@ PROTECTED_ROUTES = [
     "/lead-source",
     "/price-config",
     "/sample-report",
+    "/telecaller-actions",
+    "/telecaller-fresh",
     "/telecaller-home",
     "/telecaller-performance",
     "/user-management",
