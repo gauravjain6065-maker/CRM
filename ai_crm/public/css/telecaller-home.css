@@ -1,0 +1,207 @@
+/* ===========================
+   Telecaller Home Page
+=========================== */
+
+body.telecaller-home {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tc-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top Bar */
+.tc-topbar {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 18px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.tc-topbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.tc-topbar__brand i {
+    font-size: 22px;
+}
+
+.tc-logout-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 9px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tc-logout-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Main */
+.tc-main {
+    flex: 1;
+    padding: 50px 35px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Hero */
+.tc-hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.tc-avatar {
+    width: 100px;
+    height: 100px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    border: 3px solid rgba(255,255,255,0.4);
+    animation: pulse 2s infinite;
+}
+
+.tc-avatar i {
+    font-size: 42px;
+    color: #fff;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.3); }
+    50%       { box-shadow: 0 0 0 15px rgba(255,255,255,0); }
+}
+
+.tc-hello {
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+}
+
+.tc-subtitle {
+    color: rgba(255,255,255,0.85);
+    font-size: 17px;
+}
+
+/* Stats */
+.tc-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.tc-stat-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    transition: .3s;
+}
+
+.tc-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+}
+
+.tc-stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.tc-stat-info h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.tc-stat-info p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+/* Quick Actions */
+.tc-actions h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+
+.tc-action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.tc-action-btn {
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: 16px;
+    padding: 28px 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    transition: .3s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.tc-action-btn i {
+    font-size: 26px;
+    color: #7c3aed;
+}
+
+.tc-action-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    background: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tc-stats { grid-template-columns: 1fr; }
+    .tc-action-grid { grid-template-columns: repeat(2, 1fr); }
+    .tc-hello { font-size: 30px; }
+    .tc-main { padding: 30px 20px; }
+}

@@ -50,11 +50,22 @@ function handleLogin(e) {
     console.log('Login API response:', result.status, result.data);
 
     if (result.status === 200) {
-      // ✅ Login success — go to dashboard
-      window.location.href = '/crm-dashboard';
+      // ✅ Login success — redirect based on who logged in
+      var redirectTo = getRedirectTarget(username);
+
+      // Check if there's a redirect-to param in URL (from middleware)
+      var urlParams = new URLSearchParams(window.location.search);
+      var requestedPage = urlParams.get('redirect-to');
+
+      if (requestedPage && isAllowedForUser(username, requestedPage)) {
+        window.location.href = requestedPage;
+      } else {
+        window.location.href = redirectTo;
+      }
+
     } else {
-      // ❌ Wrong credentials — show Frappe's error message
-      var msg = 'Invalid username or password.';
+      // ❌ Wrong credentials
+      var msg = 'Invalid login credentials.';
       if (result.data) {
         if (result.data.message)       msg = result.data.message;
         else if (result.data.exc_type) msg = 'Incorrect password. Please try again.';
@@ -69,6 +80,38 @@ function handleLogin(e) {
     btn.disabled        = false;
     btnText.textContent = 'Sign In';
   });
+}
+
+/**
+ * Returns the home page for a given username
+ */
+function getRedirectTarget(username) {
+  var lower = username.toLowerCase();
+
+  // Telecaller users → telecaller home
+  if (lower === 'tellecaller' || lower === 'tellecaller@saarva.com') {
+    return '/telecaller-home';
+  }
+
+  // Admin / Administrator → main dashboard
+  return '/crm-dashboard';
+}
+
+/**
+ * Check if a user is allowed to access a certain page
+ * Prevents telecallers from being redirected to admin pages
+ */
+function isAllowedForUser(username, page) {
+  var lower = username.toLowerCase();
+  var isTelecaller = (lower === 'tellecaller' || lower === 'tellecaller@saarva.com');
+
+  if (isTelecaller) {
+    // Telecallers can only go to their own page
+    return page === '/telecaller-home';
+  }
+
+  // Admin can go anywhere
+  return true;
 }
 
 /**

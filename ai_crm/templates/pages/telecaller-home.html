@@ -1,0 +1,103 @@
+{% extends "templates/ai_crm_base.html" %}
+{% set show_custom_sidebar = False %}
+
+{% block page_title %}Telecaller Home – Saarva CRM{% endblock %}
+{% block body_class %}telecaller-home{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="/assets/ai_crm/css/telecaller-home.css">
+{% endblock %}
+
+{% block page_content %}
+<div class="tc-wrapper">
+
+  <!-- Top Bar -->
+  <header class="tc-topbar">
+    <div class="tc-topbar__brand">
+      <i class="fa-solid fa-chart-line"></i>
+      <span>Saarva CRM</span>
+    </div>
+    <button class="tc-logout-btn" onclick="handleLogout()">
+      <i class="fa-solid fa-right-from-bracket"></i> Logout
+    </button>
+  </header>
+
+  <!-- Hero Welcome Section -->
+  <main class="tc-main">
+
+    <div class="tc-hero">
+      <div class="tc-avatar">
+        <i class="fa-solid fa-headset"></i>
+      </div>
+      <h1 class="tc-hello">Hello, Telecaller! 👋</h1>
+      <p class="tc-subtitle">Welcome to your Saarva CRM workspace. Ready to make calls today?</p>
+    </div>
+
+    <!-- Quick Stats Row -->
+    <div class="tc-stats">
+      <div class="tc-stat-card">
+        <div class="tc-stat-icon" style="background:#eff6ff;color:#2563eb;">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div class="tc-stat-info">
+          <h3>0</h3>
+          <p>Calls Today</p>
+        </div>
+      </div>
+      <div class="tc-stat-card">
+        <div class="tc-stat-icon" style="background:#f0fdf4;color:#16a34a;">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+        <div class="tc-stat-info">
+          <h3>0</h3>
+          <p>Leads Handled</p>
+        </div>
+      </div>
+      <div class="tc-stat-card">
+        <div class="tc-stat-icon" style="background:#fef3c7;color:#d97706;">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <div class="tc-stat-info">
+          <h3>0</h3>
+          <p>Follow-ups Due</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="tc-actions">
+      <h2>Quick Actions</h2>
+      <div class="tc-action-grid">
+        <button class="tc-action-btn">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>Start Calling</span>
+        </button>
+        <button class="tc-action-btn">
+          <i class="fa-solid fa-list-check"></i>
+          <span>My Leads</span>
+        </button>
+        <button class="tc-action-btn">
+          <i class="fa-solid fa-calendar-check"></i>
+          <span>Follow-ups</span>
+        </button>
+        <button class="tc-action-btn">
+          <i class="fa-solid fa-chart-simple"></i>
+          <span>My Report</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script>
+  function handleLogout() {
+    fetch('/api/method/logout', { method: 'POST' })
+      .then(function() { window.location.href = '/login'; })
+      .catch(function() { window.location.href = '/login'; });
+  }
+</script>
+{% endblock %}
