@@ -1,0 +1,85 @@
+{
+    "name": "CRM Visit",
+    "doctype": "DocType",
+    "module": "ai_crm",
+    "custom": 0,
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "issingle": 0,
+    "istable": 0,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Admin",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Telecaller",
+            "create": 1,
+            "delete": 0,
+            "email": 1,
+            "export": 0,
+            "import": 0,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 0,
+            "write": 1
+        }
+    ],
+    "fields": [
+        {
+            "fieldname": "lead",
+            "fieldtype": "Link",
+            "label": "Lead",
+            "options": "CRM Lead",
+            "reqd": 1
+        },
+        {
+            "fieldname": "telecaller",
+            "fieldtype": "Link",
+            "label": "Telecaller",
+            "options": "User",
+            "reqd": 1
+        },
+        {
+            "fieldname": "visit_datetime",
+            "fieldtype": "Datetime",
+            "label": "Visit Date and Time",
+            "reqd": 1
+        },
+        {
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "Scheduled\nCompleted\nCancelled",
+            "default": "Scheduled"
+        },
+        {
+            "fieldname": "address",
+            "fieldtype": "Small Text",
+            "label": "Address"
+        }
+    ]
+}

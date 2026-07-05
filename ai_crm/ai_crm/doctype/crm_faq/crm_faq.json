@@ -1,0 +1,71 @@
+{
+    "name": "CRM FAQ",
+    "doctype": "DocType",
+    "module": "ai_crm",
+    "custom": 0,
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "issingle": 0,
+    "istable": 0,
+    "permissions": [
+        {
+            "role": "System Manager",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Admin",
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "import": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 1,
+            "write": 1
+        },
+        {
+            "role": "CRM Telecaller",
+            "create": 1,
+            "delete": 0,
+            "email": 1,
+            "export": 0,
+            "import": 0,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "share": 0,
+            "write": 1
+        }
+    ],
+    "fields": [
+        {
+            "fieldname": "question",
+            "fieldtype": "Small Text",
+            "label": "Question",
+            "reqd": 1
+        },
+        {
+            "fieldname": "answer",
+            "fieldtype": "Text Editor",
+            "label": "Answer",
+            "reqd": 1
+        },
+        {
+            "fieldname": "service",
+            "fieldtype": "Select",
+            "label": "Service",
+            "options": "Home Buying\nSeepage\nPDI\nOther"
+        }
+    ]
+}
