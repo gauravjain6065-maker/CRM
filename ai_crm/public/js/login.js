@@ -104,9 +104,9 @@ function resolveUsername(username) {
 function getRedirectTarget(username) {
   var lower = username.toLowerCase();
 
-  // Telecaller users → telecaller home
+  // Telecaller users → telecaller performance (default home)
   if (lower === 'tellecaller' || lower === 'tellecaller@saarva.com') {
-    return '/telecaller-home';
+    return '/telecaller-performance';
   }
 
   // Admin / Administrator → main dashboard
@@ -122,8 +122,17 @@ function isAllowedForUser(username, page) {
   var isTelecaller = (lower === 'tellecaller' || lower === 'tellecaller@saarva.com');
 
   if (isTelecaller) {
-    // Telecallers can only go to their own page
-    return page === '/telecaller-home';
+    // Telecallers can access all telecaller portal routes
+    var telecallerPages = [
+      '/telecaller-home',
+      '/telecaller-performance',
+      '/telecaller-actions',
+      '/telecaller-fresh',
+      '/telecaller-call'
+    ];
+    // Strip trailing slashes or query params if any
+    var cleanPage = page.split('?')[0].replace(/\/+$/, '');
+    return telecallerPages.indexOf(cleanPage) !== -1;
   }
 
   // Admin can go anywhere
